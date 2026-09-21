@@ -9,7 +9,7 @@
       <label>Controller<select class="form-select" id="sw-controller"><option value="fixed_time" selected>Fixed timer</option><option value="max_pressure">Queue rule</option><option value="jev_raw">Jev</option></select></label>
       <label>Seed<select class="form-select" id="sw-replicate"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
       <button class="btn" type="button" id="sw-play" aria-pressed="false">Play run</button>
-      <button class="btn btn-primary" type="button" id="sw-story" aria-pressed="false">▶ 15s story</button>
+      <button class="btn btn-primary" type="button" id="sw-story" aria-pressed="false">▶ 25s story</button>
     </div>
   </header>
 
@@ -18,7 +18,7 @@
     <div><span class="sw-context-label">Method</span><strong id="sw-controller-name">Jev</strong><span id="sw-controller-description"></span></div>
   </div>
 
-  <div class="sw-story-steps" aria-label="15 second comparison sequence">
+  <div class="sw-story-steps" aria-label="25 second comparison sequence">
     <span data-step="fixed_time"><b>1</b> Fixed timer</span>
     <span data-step="max_pressure"><b>2</b> Queue rule</span>
     <span data-step="jev_raw"><b>3</b> Jev</span>
@@ -126,7 +126,7 @@
   #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome { position: relative; overflow: hidden; }
   #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-result-list { opacity: .12; filter: blur(3px); }
   #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome::after { position: absolute; inset: 0 0 0 184px; display: grid; place-items: center; background: color-mix(in srgb, var(--background) 82%, transparent); font-size: 13px; font-weight: 650; content: 'Same traffic. Three ways to choose the green.'; }
-  #sony-world-traffic-simulation.sw-before-story .sw-outcome::after { content: 'Press “15s story” to reveal the comparison.'; }
+  #sony-world-traffic-simulation.sw-before-story .sw-outcome::after { content: 'Press “25s story” to reveal the comparison.'; }
   #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 2px; font-size: 15px; }
   #sony-world-traffic-simulation .sw-outcome-copy span { color: var(--muted-foreground); font-size: 10px; }
   #sony-world-traffic-simulation .sw-result-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
@@ -284,7 +284,7 @@
     storyActive = false;
     play.textContent = 'Play run';
     play.setAttribute('aria-pressed', 'false');
-    story.textContent = '▶ 15s story';
+    story.textContent = '▶ 25s story';
     story.setAttribute('aria-pressed', 'false');
     [scenario, controller, replicate, play].forEach(element => { element.disabled = false; });
     root.querySelectorAll('.sw-story-steps span').forEach(element => element.classList.remove('is-active'));
@@ -321,10 +321,10 @@
       renderFrame();
       activateStoryStep(stage.controller);
       timer = setInterval(() => {
-        const next = Math.min(Number(slider.max), Number(slider.value) + 2);
+        const next = Math.min(Number(slider.max), Number(slider.value) + 1);
         slider.value = String(next);
         renderFrame();
-      }, 130);
+      }, 125);
       storyTimers.push(setTimeout(() => {
         clearInterval(timer);
         timer = null;
@@ -337,12 +337,12 @@
           live.textContent = 'Overall: Jev 24.15 s · queue rule 25.09 s · fixed timer 33.42 s';
           storyTimers.push(setTimeout(() => {
             storyActive = false;
-            story.textContent = '↻ Replay 15s';
+            story.textContent = '↻ Replay 25s';
             story.setAttribute('aria-pressed', 'false');
             [scenario, controller, replicate, play].forEach(element => { element.disabled = false; });
-          }, 3200));
+          }, 7000));
         }
-      }, 3600));
+      }, 6000));
     }
     runStage(0);
   }
