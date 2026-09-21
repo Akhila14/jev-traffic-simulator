@@ -33,7 +33,7 @@ There are three different kinds of source material in this project:
 Official Jev references:
 
 - [TypeSafe Jev introduction](https://docs.typesafe.ai/introduction)
-- [Jev quick start](https://docs.typesafe.ai/quickstart)
+- [Jev quick start](https://docs.typesafe.ai/introduction/quickstart)
 - [Typed primitives: Choice, Score and Noul](https://docs.typesafe.ai/primitives)
 - [Confidence](https://docs.typesafe.ai/confidence)
 - [HTTP API reference](https://docs.typesafe.ai/api)
