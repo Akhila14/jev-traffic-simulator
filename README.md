@@ -124,7 +124,7 @@ cd experiments/jev-traffic
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open [http://localhost:8000/](http://localhost:8000/) in a browser and press **25s story** for the recording sequence: fixed timer → queue rule → Jev → overall result. Each method remains visible for six seconds, followed by a seven-second result screen. The layout is designed to fit at **1280×720 or larger**. Use a 16:9 browser window, hide bookmarks, and record the browser tab rather than the whole desktop. Narrow windows intentionally switch to a stacked mobile layout. The individual controls remain available for exploring scenarios after recording.
+Open [http://localhost:8000/](http://localhost:8000/) in a browser and press **25s story** for the recording sequence: fixed timer → Jev → overall result. Each method remains visible for nine seconds, followed by a seven-second result screen. The recording deliberately shows only these two methods for clarity; the written report retains the stronger deterministic max-pressure baseline. The layout is designed to fit at **1280×720 or larger**. Use a 16:9 browser window, hide bookmarks, and record the browser tab rather than the whole desktop. Narrow windows intentionally switch to a stacked mobile layout.
 
 Important files:
 

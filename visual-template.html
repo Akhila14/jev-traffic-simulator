@@ -6,7 +6,7 @@
     </div>
     <div class="sw-controls" aria-label="Replay controls">
       <label>Scenario<select class="form-select" id="sw-scenario"><option value="morning_peak">Morning peak</option><option value="evening_peak">Evening peak</option><option value="rain_and_blockage">Rain + blockage</option></select></label>
-      <label>Controller<select class="form-select" id="sw-controller"><option value="fixed_time" selected>Fixed timer</option><option value="max_pressure">Queue rule</option><option value="jev_raw">Jev</option></select></label>
+      <label>Controller<select class="form-select" id="sw-controller"><option value="fixed_time" selected>Fixed timer</option><option value="jev_raw">Jev</option></select></label>
       <label>Seed<select class="form-select" id="sw-replicate"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
       <button class="btn" type="button" id="sw-play" aria-pressed="false">Play run</button>
       <button class="btn btn-primary" type="button" id="sw-story" aria-pressed="false">▶ 25s story</button>
@@ -20,9 +20,8 @@
 
   <div class="sw-story-steps" aria-label="25 second comparison sequence">
     <span data-step="fixed_time"><b>1</b> Fixed timer</span>
-    <span data-step="max_pressure"><b>2</b> Queue rule</span>
-    <span data-step="jev_raw"><b>3</b> Jev</span>
-    <span data-step="result"><b>4</b> Result</span>
+    <span data-step="jev_raw"><b>2</b> Jev</span>
+    <span data-step="result"><b>3</b> Result</span>
   </div>
 
   <main class="sw-main">
@@ -55,7 +54,7 @@
         <div><span>P95 wait</span><strong class="tabular-nums" id="sw-p95-wait">—</strong></div>
         <div><span>Max queue</span><strong class="tabular-nums" id="sw-max-queue">—</strong></div>
       </div>
-      <h3>Same traffic, different decision methods</h3>
+      <h3>Same traffic, two decision methods</h3>
       <div class="table-responsive">
         <table class="table table-sm" aria-label="Controller comparison for selected scenario">
           <thead><tr><th>Controller</th><th class="text-end">Mean wait</th><th class="text-end">P95</th><th class="text-end">Queue</th></tr></thead>
@@ -88,7 +87,7 @@
   #sony-world-traffic-simulation .sw-context-label { color: var(--muted-foreground); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   #sony-world-traffic-simulation .sw-context strong { white-space: nowrap; }
   #sony-world-traffic-simulation .sw-context strong + span { color: var(--muted-foreground); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #sony-world-traffic-simulation .sw-story-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 7px; }
+  #sony-world-traffic-simulation .sw-story-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 7px; }
   #sony-world-traffic-simulation .sw-story-steps span { padding: 5px 8px; border-bottom: 2px solid var(--border); color: var(--muted-foreground); font-size: 10px; font-weight: 650; text-align: center; }
   #sony-world-traffic-simulation .sw-story-steps b { display: inline-grid; place-items: center; width: 16px; height: 16px; margin-right: 4px; border: 1px solid currentColor; border-radius: 50%; font-size: 9px; }
   #sony-world-traffic-simulation .sw-story-steps span.is-active { border-bottom-color: var(--viz-series-1); color: var(--foreground); }
@@ -125,11 +124,11 @@
   #sony-world-traffic-simulation .sw-outcome.is-focus { border-color: var(--viz-series-1); box-shadow: inset 0 0 0 1px var(--viz-series-1); }
   #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome { position: relative; overflow: hidden; }
   #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-result-list { opacity: .12; filter: blur(3px); }
-  #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome::after { position: absolute; inset: 0 0 0 184px; display: grid; place-items: center; background: color-mix(in srgb, var(--background) 82%, transparent); font-size: 13px; font-weight: 650; content: 'Same traffic. Three ways to choose the green.'; }
+  #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome::after { position: absolute; inset: 0 0 0 184px; display: grid; place-items: center; background: color-mix(in srgb, var(--background) 82%, transparent); font-size: 13px; font-weight: 650; content: 'Same traffic. Fixed schedule versus a Jev decision.'; }
   #sony-world-traffic-simulation.sw-before-story .sw-outcome::after { content: 'Press “25s story” to reveal the comparison.'; }
   #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 2px; font-size: 15px; }
   #sony-world-traffic-simulation .sw-outcome-copy span { color: var(--muted-foreground); font-size: 10px; }
-  #sony-world-traffic-simulation .sw-result-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+  #sony-world-traffic-simulation .sw-result-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
   #sony-world-traffic-simulation .sw-result { min-width: 0; padding-left: 8px; border-left: 3px solid var(--border); }
   #sony-world-traffic-simulation .sw-result.is-jev { border-left-color: var(--viz-series-1); }
   #sony-world-traffic-simulation .sw-result-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; font-weight: 650; }
@@ -198,7 +197,7 @@
   }
 
   function renderComparison() {
-    const order = {fixed_time:0, max_pressure:1, jev_raw:2};
+    const order = {fixed_time:0, jev_raw:1};
     const rows = DATA.aggregate.aggregate_by_scenario
       .filter(row => row.scenario === scenario.value && row.controller in order)
       .sort((a, b) => order[a.controller] - order[b.controller]);
@@ -217,7 +216,7 @@
   }
 
   function renderOverall() {
-    const rank = {jev_raw:0, max_pressure:1, fixed_time:2};
+    const rank = {jev_raw:0, fixed_time:1};
     const rows = DATA.aggregate.overall.filter(row => row.controller in rank).sort((a, b) => rank[a.controller] - rank[b.controller]);
     overall.replaceChildren(...rows.map(row => {
       const item = document.createElement('div');
@@ -308,7 +307,6 @@
     [scenario, controller, replicate, play].forEach(element => { element.disabled = true; });
     const stages = [
       {controller:'fixed_time', start:18},
-      {controller:'max_pressure', start:18},
       {controller:'jev_raw', start:18}
     ];
 
@@ -334,7 +332,7 @@
           activateStoryStep('result');
           root.classList.remove('sw-story-running');
           root.querySelector('.sw-outcome').classList.add('is-focus');
-          live.textContent = 'Overall: Jev 24.15 s · queue rule 25.09 s · fixed timer 33.42 s';
+          live.textContent = 'Overall: Jev 24.15 s average wait · fixed timer 33.42 s';
           storyTimers.push(setTimeout(() => {
             storyActive = false;
             story.textContent = '↻ Replay 25s';
@@ -342,7 +340,7 @@
             [scenario, controller, replicate, play].forEach(element => { element.disabled = false; });
           }, 7000));
         }
-      }, 6000));
+      }, 9000));
     }
     runStage(0);
   }

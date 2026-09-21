@@ -11,15 +11,16 @@ Every 15 simulated seconds, Jev received a small traffic snapshot:
 
 It could choose only one of three actions: keep the current green, serve Inner Ring Road, or serve 80 Feet Road.
 
-I compared it with a fixed timer and a hand-written queue rule.
+For the short video, I compared it with a fixed timer that changed direction every 30 seconds regardless of traffic.
 
 ```text
 Jev                 24.15 s average wait
-Queue-based rule    25.09 s
 Fixed timer         33.42 s
 ```
 
-That 0.94-second difference between Jev and the queue rule is too small to declare a winner. The more useful result is that Jev stayed close to a purpose-built deterministic rule while returning a typed decision and probabilities that code could use directly.
+That comparison shows the value of reacting to current conditions, but a fixed timer is a simple baseline. As a stronger check, I also tested a hand-written traffic-aware rule. It averaged 25.09 seconds—very close to Jev's 24.15 seconds. I left it out of the video to keep the story readable, but not out of the results.
+
+The useful finding is not that Jev “won.” It is that Jev stayed close to a purpose-built deterministic rule while returning a typed decision and probabilities that code could use directly.
 
 Safety remained ordinary code: minimum green time, clearance, starvation prevention and emergency priority were never delegated to the model.
 
