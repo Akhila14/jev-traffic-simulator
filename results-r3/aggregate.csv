@@ -1,0 +1,13 @@
+scenario,controller,replicates,live_decisions,average_wait_s,p95_wait_s,average_queue_vehicles,maximum_queue_vehicles,remaining_queue,phase_changes,safety_overrides,average_confidence,low_confidence_decisions,average_api_latency_s,api_cost_usd
+evening_peak,fixed_time,3,0,20.4703,47.6667,25.347,45.3333,42.3333,10.0,0.0,,0.0,,0.0
+evening_peak,jev_prose,3,93,16.6253,36.0,20.0153,42.6667,27.6667,15.0,6.3333,0.7521,7.3333,0.3939,0.0019619
+evening_peak,jev_raw,3,93,15.2697,34.6667,18.462,39.3333,28.6667,15.0,6.0,0.6228,12.6667,0.4001,0.0021908
+evening_peak,max_pressure,3,0,16.8407,36.0,20.1743,43.3333,31.3333,15.6667,9.6667,,0.0,,0.0
+morning_peak,fixed_time,3,0,25.4117,57.6667,28.273,54.6667,19.6667,10.0,0.0,,0.0,,0.0
+morning_peak,jev_prose,3,93,15.0907,33.6667,16.7187,34.6667,17.0,15.0,6.3333,0.7308,9.3333,0.3871,0.00195749
+morning_peak,jev_raw,3,93,15.408,34.6667,17.064,34.6667,17.0,15.0,6.6667,0.5456,18.6667,0.4231,0.00218875
+morning_peak,max_pressure,3,0,15.6873,36.0,17.32,34.6667,15.0,15.3333,8.0,,0.0,,0.0
+rain_and_blockage,fixed_time,3,0,54.375,109.3333,64.778,109.6667,105.0,14.6667,7.6667,,0.0,,0.0
+rain_and_blockage,jev_prose,3,93,41.7733,85.0,49.9927,90.6667,84.0,14.3333,2.6667,0.8278,4.6667,0.4035,0.00195224
+rain_and_blockage,jev_raw,3,93,41.762,88.0,49.8897,89.0,84.0,14.6667,4.0,0.6349,12.3333,0.4168,0.00219488
+rain_and_blockage,max_pressure,3,0,42.736,84.6667,51.146,91.3333,88.3333,15.6667,5.6667,,0.0,,0.0

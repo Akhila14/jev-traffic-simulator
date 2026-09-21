@@ -1,0 +1,1232 @@
+{
+  "summary": {
+    "scenario": "morning_peak",
+    "replicate": 3,
+    "scenario_description": "Heavy inbound Inner Ring Road demand, then a smaller late surge on 80 Feet Road.",
+    "controller": "jev_raw",
+    "duration_s": 480,
+    "arrived": 535,
+    "departed": 512,
+    "remaining_queue": 23,
+    "throughput_ratio": 0.957,
+    "average_wait_s": 13.816,
+    "p95_wait_s": 34,
+    "maximum_observed_wait_s": 42,
+    "average_queue_vehicles": 15.027,
+    "maximum_queue_vehicles": 31,
+    "phase_changes": 16,
+    "safety_overrides": 8,
+    "emergency_delay_s": null,
+    "decision_count": 31,
+    "average_confidence": 0.5358,
+    "low_confidence_decisions": 19,
+    "average_api_latency_s": 0.4636,
+    "api_cost_usd": 0.00072983,
+    "decisions": [
+      {
+        "time_s": 15,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.66,
+        "probabilities": {
+          "extend_current": 0.2,
+          "serve_inner_ring_road": 0.02,
+          "serve_80_feet_road": 0.78
+        },
+        "latency_s": 0.870675583020784,
+        "cost_usd": 2.331e-05
+      },
+      {
+        "time_s": 30,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.26,
+        "probabilities": {
+          "serve_80_feet_road": 0.02,
+          "extend_current": 0.48,
+          "serve_inner_ring_road": 0.5
+        },
+        "latency_s": 0.3958053339738399,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 45,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.33,
+        "probabilities": {
+          "serve_80_feet_road": 0.01,
+          "serve_inner_ring_road": 0.56,
+          "extend_current": 0.43
+        },
+        "latency_s": 0.3307868749834597,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 60,
+        "requested": "extend_current",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.83,
+        "probabilities": {
+          "extend_current": 0.89,
+          "serve_80_feet_road": 0.07,
+          "serve_inner_ring_road": 0.04
+        },
+        "latency_s": 0.8242499170592055,
+        "cost_usd": 2.3394e-05
+      },
+      {
+        "time_s": 75,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.66,
+        "probabilities": {
+          "serve_inner_ring_road": 0.02,
+          "serve_80_feet_road": 0.77,
+          "extend_current": 0.21
+        },
+        "latency_s": 0.4297392499865964,
+        "cost_usd": 2.3394e-05
+      },
+      {
+        "time_s": 90,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.32,
+        "probabilities": {
+          "serve_inner_ring_road": 0.54,
+          "extend_current": 0.44,
+          "serve_80_feet_road": 0.02
+        },
+        "latency_s": 0.38807266706135124,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 105,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.5,
+        "probabilities": {
+          "serve_inner_ring_road": 0.66,
+          "serve_80_feet_road": 0.01,
+          "extend_current": 0.33
+        },
+        "latency_s": 0.4506129580549896,
+        "cost_usd": 2.3688e-05
+      },
+      {
+        "time_s": 120,
+        "requested": "extend_current",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.88,
+        "probabilities": {
+          "serve_inner_ring_road": 0.05,
+          "serve_80_feet_road": 0.03,
+          "extend_current": 0.92
+        },
+        "latency_s": 0.4908376659732312,
+        "cost_usd": 2.3478e-05
+      },
+      {
+        "time_s": 135,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.52,
+        "probabilities": {
+          "serve_80_feet_road": 0.67,
+          "serve_inner_ring_road": 0.03,
+          "extend_current": 0.3
+        },
+        "latency_s": 0.3682502079755068,
+        "cost_usd": 2.3436e-05
+      },
+      {
+        "time_s": 150,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.37,
+        "probabilities": {
+          "serve_80_feet_road": 0.01,
+          "extend_current": 0.4,
+          "serve_inner_ring_road": 0.59
+        },
+        "latency_s": 0.32001954200677574,
+        "cost_usd": 2.3688e-05
+      },
+      {
+        "time_s": 165,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.44,
+        "probabilities": {
+          "serve_inner_ring_road": 0.63,
+          "serve_80_feet_road": 0.01,
+          "extend_current": 0.36
+        },
+        "latency_s": 0.9002525840187445,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 180,
+        "requested": "extend_current",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.87,
+        "probabilities": {
+          "extend_current": 0.91,
+          "serve_80_feet_road": 0.02,
+          "serve_inner_ring_road": 0.07
+        },
+        "latency_s": 0.373176374938339,
+        "cost_usd": 2.3436e-05
+      },
+      {
+        "time_s": 195,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.57,
+        "probabilities": {
+          "extend_current": 0.26,
+          "serve_inner_ring_road": 0.02,
+          "serve_80_feet_road": 0.72
+        },
+        "latency_s": 0.34586399991530925,
+        "cost_usd": 2.3352e-05
+      },
+      {
+        "time_s": 210,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.28,
+        "probabilities": {
+          "extend_current": 0.47,
+          "serve_inner_ring_road": 0.52,
+          "serve_80_feet_road": 0.01
+        },
+        "latency_s": 0.42856295802630484,
+        "cost_usd": 2.3604e-05
+      },
+      {
+        "time_s": 225,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.44,
+        "probabilities": {
+          "serve_80_feet_road": 0.01,
+          "serve_inner_ring_road": 0.62,
+          "extend_current": 0.37
+        },
+        "latency_s": 0.34075733297504485,
+        "cost_usd": 2.3688e-05
+      },
+      {
+        "time_s": 240,
+        "requested": "extend_current",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.78,
+        "probabilities": {
+          "serve_inner_ring_road": 0.05,
+          "extend_current": 0.86,
+          "serve_80_feet_road": 0.09
+        },
+        "latency_s": 0.3551875411067158,
+        "cost_usd": 2.3478e-05
+      },
+      {
+        "time_s": 255,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.67,
+        "probabilities": {
+          "serve_80_feet_road": 0.78,
+          "serve_inner_ring_road": 0.02,
+          "extend_current": 0.2
+        },
+        "latency_s": 0.3401757919928059,
+        "cost_usd": 2.3436e-05
+      },
+      {
+        "time_s": 270,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.42,
+        "probabilities": {
+          "serve_inner_ring_road": 0.62,
+          "extend_current": 0.37,
+          "serve_80_feet_road": 0.01
+        },
+        "latency_s": 0.3565429999725893,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 285,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.4,
+        "probabilities": {
+          "extend_current": 0.39,
+          "serve_80_feet_road": 0.01,
+          "serve_inner_ring_road": 0.6
+        },
+        "latency_s": 0.31584162497892976,
+        "cost_usd": 2.3688e-05
+      },
+      {
+        "time_s": 300,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.37,
+        "probabilities": {
+          "serve_80_feet_road": 0.58,
+          "serve_inner_ring_road": 0.03,
+          "extend_current": 0.39
+        },
+        "latency_s": 0.7799811660079286,
+        "cost_usd": 2.3394e-05
+      },
+      {
+        "time_s": 315,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.67,
+        "probabilities": {
+          "serve_80_feet_road": 0.78,
+          "extend_current": 0.2,
+          "serve_inner_ring_road": 0.02
+        },
+        "latency_s": 0.4068028340116143,
+        "cost_usd": 2.3436e-05
+      },
+      {
+        "time_s": 330,
+        "requested": "extend_current",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.85,
+        "probabilities": {
+          "serve_inner_ring_road": 0.08,
+          "extend_current": 0.9,
+          "serve_80_feet_road": 0.02
+        },
+        "latency_s": 0.7301205409457907,
+        "cost_usd": 2.373e-05
+      },
+      {
+        "time_s": 345,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.47,
+        "probabilities": {
+          "serve_inner_ring_road": 0.65,
+          "serve_80_feet_road": 0.02,
+          "extend_current": 0.33
+        },
+        "latency_s": 0.8346306660678238,
+        "cost_usd": 2.3688e-05
+      },
+      {
+        "time_s": 360,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.37,
+        "probabilities": {
+          "serve_inner_ring_road": 0.03,
+          "serve_80_feet_road": 0.58,
+          "extend_current": 0.39
+        },
+        "latency_s": 0.3640878750011325,
+        "cost_usd": 2.3394e-05
+      },
+      {
+        "time_s": 375,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.73,
+        "probabilities": {
+          "extend_current": 0.17,
+          "serve_80_feet_road": 0.82,
+          "serve_inner_ring_road": 0.01
+        },
+        "latency_s": 0.33464087499305606,
+        "cost_usd": 2.3394e-05
+      },
+      {
+        "time_s": 390,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "minimum_green",
+        "confidence": 0.4,
+        "probabilities": {
+          "serve_80_feet_road": 0.02,
+          "extend_current": 0.38,
+          "serve_inner_ring_road": 0.6
+        },
+        "latency_s": 0.381061292020604,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 405,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.43,
+        "probabilities": {
+          "serve_inner_ring_road": 0.63,
+          "serve_80_feet_road": 0.01,
+          "extend_current": 0.36
+        },
+        "latency_s": 0.387889500008896,
+        "cost_usd": 2.3688e-05
+      },
+      {
+        "time_s": 420,
+        "requested": "extend_current",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.6,
+        "probabilities": {
+          "extend_current": 0.73,
+          "serve_inner_ring_road": 0.03,
+          "serve_80_feet_road": 0.24
+        },
+        "latency_s": 0.37876108405180275,
+        "cost_usd": 2.3394e-05
+      },
+      {
+        "time_s": 435,
+        "requested": "serve_80_feet_road",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.65,
+        "probabilities": {
+          "serve_inner_ring_road": 0.01,
+          "serve_80_feet_road": 0.77,
+          "extend_current": 0.22
+        },
+        "latency_s": 0.3154817910399288,
+        "cost_usd": 2.3436e-05
+      },
+      {
+        "time_s": 450,
+        "requested": "extend_current",
+        "applied_phase": "koramangala_80_feet_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.46,
+        "probabilities": {
+          "serve_80_feet_road": 0.02,
+          "serve_inner_ring_road": 0.34,
+          "extend_current": 0.64
+        },
+        "latency_s": 0.4083780839573592,
+        "cost_usd": 2.3646e-05
+      },
+      {
+        "time_s": 465,
+        "requested": "serve_inner_ring_road",
+        "applied_phase": "inner_ring_road",
+        "safety_reason": "model_or_controller",
+        "confidence": 0.41,
+        "probabilities": {
+          "extend_current": 0.37,
+          "serve_80_feet_road": 0.02,
+          "serve_inner_ring_road": 0.61
+        },
+        "latency_s": 0.4244937499752268,
+        "cost_usd": 2.3688e-05
+      }
+    ]
+  },
+  "trace": [
+    {
+      "time_s": 0,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 0,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 5,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 2,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 2
+    },
+    {
+      "time_s": 10,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 5,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 7
+    },
+    {
+      "time_s": 15,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 9,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 12
+    },
+    {
+      "time_s": 20,
+      "inner_ring_queue": 3,
+      "eighty_feet_queue": 10,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 4,
+      "eighty_feet_oldest_wait_s": 15
+    },
+    {
+      "time_s": 25,
+      "inner_ring_queue": 7,
+      "eighty_feet_queue": 3,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 9,
+      "eighty_feet_oldest_wait_s": 5
+    },
+    {
+      "time_s": 30,
+      "inner_ring_queue": 10,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 14,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 35,
+      "inner_ring_queue": 11,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 40,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 24,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 45,
+      "inner_ring_queue": 17,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 29,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 50,
+      "inner_ring_queue": 18,
+      "eighty_feet_queue": 1,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 28,
+      "eighty_feet_oldest_wait_s": 3
+    },
+    {
+      "time_s": 55,
+      "inner_ring_queue": 10,
+      "eighty_feet_queue": 4,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 17,
+      "eighty_feet_oldest_wait_s": 8
+    },
+    {
+      "time_s": 60,
+      "inner_ring_queue": 7,
+      "eighty_feet_queue": 4,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 11,
+      "eighty_feet_oldest_wait_s": 13
+    },
+    {
+      "time_s": 65,
+      "inner_ring_queue": 3,
+      "eighty_feet_queue": 7,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 2,
+      "eighty_feet_oldest_wait_s": 18
+    },
+    {
+      "time_s": 70,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 9,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 23
+    },
+    {
+      "time_s": 75,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 14,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 28
+    },
+    {
+      "time_s": 80,
+      "inner_ring_queue": 2,
+      "eighty_feet_queue": 13,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 4,
+      "eighty_feet_oldest_wait_s": 25
+    },
+    {
+      "time_s": 85,
+      "inner_ring_queue": 6,
+      "eighty_feet_queue": 6,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 9,
+      "eighty_feet_oldest_wait_s": 11
+    },
+    {
+      "time_s": 90,
+      "inner_ring_queue": 11,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 14,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 95,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 100,
+      "inner_ring_queue": 19,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 24,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 105,
+      "inner_ring_queue": 23,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 29,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 110,
+      "inner_ring_queue": 27,
+      "eighty_feet_queue": 1,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 28,
+      "eighty_feet_oldest_wait_s": 4
+    },
+    {
+      "time_s": 115,
+      "inner_ring_queue": 22,
+      "eighty_feet_queue": 6,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 23,
+      "eighty_feet_oldest_wait_s": 9
+    },
+    {
+      "time_s": 120,
+      "inner_ring_queue": 20,
+      "eighty_feet_queue": 7,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 14
+    },
+    {
+      "time_s": 125,
+      "inner_ring_queue": 16,
+      "eighty_feet_queue": 10,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 15,
+      "eighty_feet_oldest_wait_s": 19
+    },
+    {
+      "time_s": 130,
+      "inner_ring_queue": 11,
+      "eighty_feet_queue": 14,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 12,
+      "eighty_feet_oldest_wait_s": 24
+    },
+    {
+      "time_s": 135,
+      "inner_ring_queue": 6,
+      "eighty_feet_queue": 15,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 8,
+      "eighty_feet_oldest_wait_s": 29
+    },
+    {
+      "time_s": 140,
+      "inner_ring_queue": 10,
+      "eighty_feet_queue": 13,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 13,
+      "eighty_feet_oldest_wait_s": 27
+    },
+    {
+      "time_s": 145,
+      "inner_ring_queue": 14,
+      "eighty_feet_queue": 9,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 18,
+      "eighty_feet_oldest_wait_s": 15
+    },
+    {
+      "time_s": 150,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 23,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 155,
+      "inner_ring_queue": 17,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 28,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 160,
+      "inner_ring_queue": 20,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 33,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 165,
+      "inner_ring_queue": 26,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 38,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 170,
+      "inner_ring_queue": 28,
+      "eighty_feet_queue": 3,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 40,
+      "eighty_feet_oldest_wait_s": 4
+    },
+    {
+      "time_s": 175,
+      "inner_ring_queue": 22,
+      "eighty_feet_queue": 3,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 33,
+      "eighty_feet_oldest_wait_s": 9
+    },
+    {
+      "time_s": 180,
+      "inner_ring_queue": 18,
+      "eighty_feet_queue": 5,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 21,
+      "eighty_feet_oldest_wait_s": 14
+    },
+    {
+      "time_s": 185,
+      "inner_ring_queue": 12,
+      "eighty_feet_queue": 6,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 16,
+      "eighty_feet_oldest_wait_s": 19
+    },
+    {
+      "time_s": 190,
+      "inner_ring_queue": 7,
+      "eighty_feet_queue": 6,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 11,
+      "eighty_feet_oldest_wait_s": 24
+    },
+    {
+      "time_s": 195,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 7,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 29
+    },
+    {
+      "time_s": 200,
+      "inner_ring_queue": 1,
+      "eighty_feet_queue": 5,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 2,
+      "eighty_feet_oldest_wait_s": 21
+    },
+    {
+      "time_s": 205,
+      "inner_ring_queue": 5,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 7,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 210,
+      "inner_ring_queue": 7,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 12,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 215,
+      "inner_ring_queue": 12,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 17,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 220,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 22,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 225,
+      "inner_ring_queue": 18,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 27,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 230,
+      "inner_ring_queue": 19,
+      "eighty_feet_queue": 3,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 27,
+      "eighty_feet_oldest_wait_s": 4
+    },
+    {
+      "time_s": 235,
+      "inner_ring_queue": 18,
+      "eighty_feet_queue": 4,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 20,
+      "eighty_feet_oldest_wait_s": 9
+    },
+    {
+      "time_s": 240,
+      "inner_ring_queue": 14,
+      "eighty_feet_queue": 6,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 11,
+      "eighty_feet_oldest_wait_s": 14
+    },
+    {
+      "time_s": 245,
+      "inner_ring_queue": 13,
+      "eighty_feet_queue": 7,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 10,
+      "eighty_feet_oldest_wait_s": 19
+    },
+    {
+      "time_s": 250,
+      "inner_ring_queue": 5,
+      "eighty_feet_queue": 8,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 6,
+      "eighty_feet_oldest_wait_s": 24
+    },
+    {
+      "time_s": 255,
+      "inner_ring_queue": 2,
+      "eighty_feet_queue": 10,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 2,
+      "eighty_feet_oldest_wait_s": 29
+    },
+    {
+      "time_s": 260,
+      "inner_ring_queue": 4,
+      "eighty_feet_queue": 9,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 7,
+      "eighty_feet_oldest_wait_s": 25
+    },
+    {
+      "time_s": 265,
+      "inner_ring_queue": 7,
+      "eighty_feet_queue": 2,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 12,
+      "eighty_feet_oldest_wait_s": 3
+    },
+    {
+      "time_s": 270,
+      "inner_ring_queue": 9,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 17,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 275,
+      "inner_ring_queue": 10,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 22,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 280,
+      "inner_ring_queue": 13,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 27,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 285,
+      "inner_ring_queue": 14,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 32,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 290,
+      "inner_ring_queue": 16,
+      "eighty_feet_queue": 3,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 33,
+      "eighty_feet_oldest_wait_s": 4
+    },
+    {
+      "time_s": 295,
+      "inner_ring_queue": 10,
+      "eighty_feet_queue": 5,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 18,
+      "eighty_feet_oldest_wait_s": 9
+    },
+    {
+      "time_s": 300,
+      "inner_ring_queue": 5,
+      "eighty_feet_queue": 9,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 7,
+      "eighty_feet_oldest_wait_s": 14
+    },
+    {
+      "time_s": 305,
+      "inner_ring_queue": 2,
+      "eighty_feet_queue": 10,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 1,
+      "eighty_feet_oldest_wait_s": 19
+    },
+    {
+      "time_s": 310,
+      "inner_ring_queue": 2,
+      "eighty_feet_queue": 14,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 1,
+      "eighty_feet_oldest_wait_s": 24
+    },
+    {
+      "time_s": 315,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 17,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 29
+    },
+    {
+      "time_s": 320,
+      "inner_ring_queue": 4,
+      "eighty_feet_queue": 20,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 4,
+      "eighty_feet_oldest_wait_s": 28
+    },
+    {
+      "time_s": 325,
+      "inner_ring_queue": 5,
+      "eighty_feet_queue": 14,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 9,
+      "eighty_feet_oldest_wait_s": 15
+    },
+    {
+      "time_s": 330,
+      "inner_ring_queue": 9,
+      "eighty_feet_queue": 11,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 14,
+      "eighty_feet_oldest_wait_s": 13
+    },
+    {
+      "time_s": 335,
+      "inner_ring_queue": 12,
+      "eighty_feet_queue": 3,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 5
+    },
+    {
+      "time_s": 340,
+      "inner_ring_queue": 14,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 24,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 345,
+      "inner_ring_queue": 17,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 29,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 350,
+      "inner_ring_queue": 16,
+      "eighty_feet_queue": 2,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 30,
+      "eighty_feet_oldest_wait_s": 2
+    },
+    {
+      "time_s": 355,
+      "inner_ring_queue": 8,
+      "eighty_feet_queue": 5,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 7
+    },
+    {
+      "time_s": 360,
+      "inner_ring_queue": 1,
+      "eighty_feet_queue": 5,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 3,
+      "eighty_feet_oldest_wait_s": 12
+    },
+    {
+      "time_s": 365,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 7,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 17
+    },
+    {
+      "time_s": 370,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 9,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 22
+    },
+    {
+      "time_s": 375,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 11,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 27
+    },
+    {
+      "time_s": 380,
+      "inner_ring_queue": 4,
+      "eighty_feet_queue": 10,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 4,
+      "eighty_feet_oldest_wait_s": 29
+    },
+    {
+      "time_s": 385,
+      "inner_ring_queue": 6,
+      "eighty_feet_queue": 2,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 9,
+      "eighty_feet_oldest_wait_s": 6
+    },
+    {
+      "time_s": 390,
+      "inner_ring_queue": 8,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 14,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 395,
+      "inner_ring_queue": 11,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 400,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 24,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 405,
+      "inner_ring_queue": 17,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 29,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 410,
+      "inner_ring_queue": 17,
+      "eighty_feet_queue": 1,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 30,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 415,
+      "inner_ring_queue": 9,
+      "eighty_feet_queue": 4,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 16,
+      "eighty_feet_oldest_wait_s": 5
+    },
+    {
+      "time_s": 420,
+      "inner_ring_queue": 4,
+      "eighty_feet_queue": 6,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 7,
+      "eighty_feet_oldest_wait_s": 10
+    },
+    {
+      "time_s": 425,
+      "inner_ring_queue": 1,
+      "eighty_feet_queue": 8,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 15
+    },
+    {
+      "time_s": 430,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 13,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 20
+    },
+    {
+      "time_s": 435,
+      "inner_ring_queue": 0,
+      "eighty_feet_queue": 14,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 0,
+      "eighty_feet_oldest_wait_s": 25
+    },
+    {
+      "time_s": 440,
+      "inner_ring_queue": 2,
+      "eighty_feet_queue": 13,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 4,
+      "eighty_feet_oldest_wait_s": 25
+    },
+    {
+      "time_s": 445,
+      "inner_ring_queue": 5,
+      "eighty_feet_queue": 7,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 9,
+      "eighty_feet_oldest_wait_s": 15
+    },
+    {
+      "time_s": 450,
+      "inner_ring_queue": 7,
+      "eighty_feet_queue": 3,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 14,
+      "eighty_feet_oldest_wait_s": 1
+    },
+    {
+      "time_s": 455,
+      "inner_ring_queue": 9,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 19,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 460,
+      "inner_ring_queue": 10,
+      "eighty_feet_queue": 0,
+      "phase": "koramangala_80_feet_road",
+      "inner_ring_oldest_wait_s": 24,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 465,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 0,
+      "phase": "clearance",
+      "inner_ring_oldest_wait_s": 29,
+      "eighty_feet_oldest_wait_s": 0
+    },
+    {
+      "time_s": 470,
+      "inner_ring_queue": 15,
+      "eighty_feet_queue": 3,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 28,
+      "eighty_feet_oldest_wait_s": 4
+    },
+    {
+      "time_s": 475,
+      "inner_ring_queue": 11,
+      "eighty_feet_queue": 9,
+      "phase": "inner_ring_road",
+      "inner_ring_oldest_wait_s": 12,
+      "eighty_feet_oldest_wait_s": 9
+    }
+  ]
+}
