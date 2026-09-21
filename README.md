@@ -137,3 +137,4 @@ Important files:
 - [`results-r3/aggregate.json`](results-r3/aggregate.json): summarized results.
 - [`results-r3/summary.json`](results-r3/summary.json): all 36 run summaries and Jev decisions.
 - [`post.md`](post.md): evidence-based LinkedIn draft.
+- [`technical-faq.md`](technical-faq.md): precise answers about access, data, methodology and limitations.
