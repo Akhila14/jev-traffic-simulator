@@ -1,0 +1,247 @@
+<div id="sony-world-traffic-simulation">
+  <h2>Sony World-inspired signal replay</h2>
+  <div class="viz-controls" aria-label="Replay controls">
+    <label class="form-label">Scenario
+      <select class="form-select" id="sw-scenario">
+        <option value="morning_peak">Morning peak</option>
+        <option value="evening_peak">Evening peak</option>
+        <option value="rain_and_blockage">Rain + blockage</option>
+      </select>
+    </label>
+    <label class="form-label">Controller
+      <select class="form-select" id="sw-controller">
+        <option value="fixed_time">Fixed time</option>
+        <option value="max_pressure">Max pressure</option>
+        <option value="jev_raw" selected>Jev · raw JSON</option>
+        <option value="jev_prose">Jev · prose</option>
+      </select>
+    </label>
+    <label class="form-label">Arrival seed
+      <select class="form-select" id="sw-replicate">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </label>
+    <button class="btn btn-primary" type="button" id="sw-play" aria-pressed="false">Play</button>
+  </div>
+
+  <div class="sw-context" aria-live="polite">
+    <div><strong id="sw-scenario-name">Morning peak</strong> — <span id="sw-scenario-description"></span></div>
+    <div><strong id="sw-controller-name">Jev · raw JSON</strong> — <span id="sw-controller-description"></span></div>
+  </div>
+
+  <div class="viz-grid sw-stats" aria-label="Selected run metrics">
+    <div class="card viz-stat"><span class="text-muted">Mean wait</span><span class="viz-stat-value tabular-nums" id="sw-mean-wait">—</span></div>
+    <div class="card viz-stat"><span class="text-muted">P95 wait</span><span class="viz-stat-value tabular-nums" id="sw-p95-wait">—</span></div>
+    <div class="card viz-stat"><span class="text-muted">Maximum queue</span><span class="viz-stat-value tabular-nums" id="sw-max-queue">—</span></div>
+  </div>
+
+  <svg class="sw-junction" viewBox="0 0 720 430" role="img" aria-labelledby="sw-title sw-desc">
+    <title id="sw-title">Simulated Sony World junction queues and signal phase</title>
+    <desc id="sw-desc">A two-corridor schematic showing queue sizes on Inner Ring Road and Koramangala 80 Feet Road over simulated time.</desc>
+    <rect class="sw-road" x="35" y="165" width="650" height="100"></rect>
+    <rect class="sw-road" x="310" y="25" width="100" height="380"></rect>
+    <line class="sw-lane" x1="35" y1="215" x2="685" y2="215"></line>
+    <line class="sw-lane" x1="360" y1="25" x2="360" y2="405"></line>
+    <text class="sw-label" x="48" y="150">Inner Ring Road / 100 Feet Road</text>
+    <text class="sw-label" x="425" y="390">Koramangala 80 Feet Road</text>
+    <rect class="sw-queue sw-inner" id="sw-inner-queue" x="300" y="184" width="0" height="24"></rect>
+    <rect class="sw-queue sw-eighty" id="sw-eighty-queue" x="376" y="275" width="24" height="0"></rect>
+    <circle class="sw-signal" id="sw-inner-signal" cx="292" cy="196" r="10"></circle>
+    <circle class="sw-signal" id="sw-eighty-signal" cx="388" cy="275" r="10"></circle>
+    <text class="sw-count tabular-nums" id="sw-inner-count" x="48" y="247">0 vehicles</text>
+    <text class="sw-count tabular-nums" id="sw-eighty-count" x="425" y="370">0 vehicles</text>
+    <text class="sw-time tabular-nums" id="sw-time" x="360" y="418" text-anchor="middle">00:00</text>
+  </svg>
+
+  <label class="form-label sw-timeline">Simulation time
+    <input class="form-range" id="sw-slider" type="range" min="0" max="95" value="0" step="1">
+  </label>
+  <div class="text-small text-muted sw-live" id="sw-live" aria-live="polite">Ready</div>
+
+  <div class="table-responsive">
+    <table class="table table-sm" aria-label="Controller comparison for selected scenario">
+      <thead><tr><th>Controller</th><th class="text-end">Mean wait</th><th class="text-end">P95</th><th class="text-end">Mean queue</th></tr></thead>
+      <tbody id="sw-comparison"></tbody>
+    </table>
+  </div>
+
+  <section class="sw-outcome" aria-labelledby="sw-outcome-title">
+    <h3 id="sw-outcome-title">Experiment outcome · all scenarios and seeds</h3>
+    <div class="text-small text-muted">36 runs · 558 live Jev decisions · total inference cost $0.0124</div>
+    <div class="table-responsive">
+      <table class="table table-sm" aria-label="Overall controller results across all scenarios and seeds">
+        <thead><tr><th>Controller</th><th class="text-end">Mean wait</th><th class="text-end">P95 wait</th><th class="text-end">Mean queue</th><th class="text-end">Max queue</th><th class="text-end">Jev confidence</th></tr></thead>
+        <tbody id="sw-overall"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<style>
+  #sony-world-traffic-simulation { width: 100%; color: var(--foreground); }
+  #sony-world-traffic-simulation .sw-stats { margin-block: 12px; }
+  #sony-world-traffic-simulation .sw-context { margin-top: 10px; padding-left: 10px; border-left: 3px solid var(--accent); font-size: 13px; line-height: 1.55; }
+  #sony-world-traffic-simulation .sw-junction { width: 100%; display: block; }
+  #sony-world-traffic-simulation .sw-road { fill: color-mix(in srgb, var(--foreground) 9%, transparent); }
+  #sony-world-traffic-simulation .sw-lane { stroke: var(--border); stroke-width: 2; stroke-dasharray: 12 10; }
+  #sony-world-traffic-simulation .sw-label,
+  #sony-world-traffic-simulation .sw-count,
+  #sony-world-traffic-simulation .sw-time { fill: var(--foreground); font-size: 12px; }
+  #sony-world-traffic-simulation .sw-queue { opacity: .82; }
+  #sony-world-traffic-simulation .sw-inner { fill: var(--viz-series-1); }
+  #sony-world-traffic-simulation .sw-eighty { fill: var(--viz-series-2); }
+  #sony-world-traffic-simulation .sw-signal { stroke: var(--background); stroke-width: 3; }
+  #sony-world-traffic-simulation .sw-timeline { display: block; margin-top: 8px; }
+  #sony-world-traffic-simulation .sw-live { min-height: 20px; text-align: center; }
+  #sony-world-traffic-simulation tr.is-selected { background: color-mix(in srgb, var(--accent) 55%, transparent); }
+  #sony-world-traffic-simulation .sw-outcome { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
+  #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 3px; font-size: 16px; }
+  #sony-world-traffic-simulation .sw-outcome .table-responsive { margin-top: 8px; }
+  #sony-world-traffic-simulation .sw-outcome tr.is-jev { font-weight: 650; }
+  @media (max-width: 520px) {
+    #sony-world-traffic-simulation .sw-junction { margin-top: 4px; }
+  }
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('sony-world-traffic-simulation');
+  const DATA = /*__DATA__*/;
+  const scenario = root.querySelector('#sw-scenario');
+  const controller = root.querySelector('#sw-controller');
+  const replicate = root.querySelector('#sw-replicate');
+  const slider = root.querySelector('#sw-slider');
+  const play = root.querySelector('#sw-play');
+  const innerQueue = root.querySelector('#sw-inner-queue');
+  const eightyQueue = root.querySelector('#sw-eighty-queue');
+  const innerSignal = root.querySelector('#sw-inner-signal');
+  const eightySignal = root.querySelector('#sw-eighty-signal');
+  const innerCount = root.querySelector('#sw-inner-count');
+  const eightyCount = root.querySelector('#sw-eighty-count');
+  const timeLabel = root.querySelector('#sw-time');
+  const live = root.querySelector('#sw-live');
+  const comparison = root.querySelector('#sw-comparison');
+  const overall = root.querySelector('#sw-overall');
+  const scenarioName = root.querySelector('#sw-scenario-name');
+  const scenarioDescription = root.querySelector('#sw-scenario-description');
+  const controllerName = root.querySelector('#sw-controller-name');
+  const controllerDescription = root.querySelector('#sw-controller-description');
+  const labels = {fixed_time:'Fixed time',max_pressure:'Max pressure',jev_raw:'Jev · raw JSON',jev_prose:'Jev · prose'};
+  const scenarioDescriptions = {
+    morning_peak: 'heavier Inner Ring Road demand, followed by a smaller 80 Feet Road surge.',
+    evening_peak: 'demand grows on Koramangala 80 Feet Road.',
+    rain_and_blockage: 'lower wet-weather capacity, a temporary blockage and an emergency vehicle.'
+  };
+  const controllerDescriptions = {
+    fixed_time: 'ordinary code changes direction after 30 green seconds; it does not inspect traffic.',
+    max_pressure: 'ordinary code compares queue length and oldest wait, then serves the road under greater pressure.',
+    jev_raw: 'Jev receives numeric JSON: queues, waits, recent arrivals and current phase time.',
+    jev_prose: 'Jev receives the same state translated into phrases such as “heavy queue” or “long wait”.'
+  };
+  let timer = null;
+  let run = null;
+
+  const runKey = () => `${scenario.value}--${controller.value}--r${replicate.value}`;
+  const fmt = value => `${Number(value).toFixed(1)} s`;
+
+  function setSignal(element, state) {
+    element.style.fill = state === 'green' ? 'var(--green)' : state === 'clearance' ? 'var(--yellow)' : 'var(--red)';
+  }
+
+  function renderComparison() {
+    const rows = DATA.aggregate.aggregate_by_scenario.filter(row => row.scenario === scenario.value);
+    comparison.replaceChildren(...rows.map(row => {
+      const tr = document.createElement('tr');
+      if (row.controller === controller.value) tr.className = 'is-selected';
+      const values = [labels[row.controller], fmt(row.average_wait_s), fmt(row.p95_wait_s), Number(row.average_queue_vehicles).toFixed(1)];
+      values.forEach((value, index) => {
+        const cell = document.createElement(index === 0 ? 'th' : 'td');
+        cell.textContent = value;
+        if (index > 0) cell.className = 'text-end';
+        tr.appendChild(cell);
+      });
+      return tr;
+    }));
+  }
+
+  function renderOverall() {
+    const rank = {jev_raw:0, jev_prose:1, max_pressure:2, fixed_time:3};
+    const rows = [...DATA.aggregate.overall].sort((a, b) => rank[a.controller] - rank[b.controller]);
+    overall.replaceChildren(...rows.map(row => {
+      const tr = document.createElement('tr');
+      if (row.controller.startsWith('jev_')) tr.className = 'is-jev';
+      const confidence = row.average_confidence == null ? '—' : Number(row.average_confidence).toFixed(2);
+      const values = [labels[row.controller], `${Number(row.average_wait_s).toFixed(2)} s`, `${Number(row.p95_wait_s).toFixed(2)} s`, Number(row.average_queue_vehicles).toFixed(2), Number(row.maximum_queue_vehicles).toFixed(2), confidence];
+      values.forEach((value, index) => {
+        const cell = document.createElement(index === 0 ? 'th' : 'td');
+        cell.textContent = value;
+        if (index > 0) cell.className = 'text-end';
+        tr.appendChild(cell);
+      });
+      return tr;
+    }));
+  }
+
+  function renderFrame() {
+    const index = Number(slider.value);
+    const frame = run.trace[index];
+    const [seconds, inner, eighty, phase, innerWait, eightyWait] = frame;
+    const scale = Math.max(1, ...run.trace.map(row => Math.max(row[1], row[2])));
+    const innerWidth = Math.min(240, inner / scale * 240);
+    const eightyHeight = Math.min(125, eighty / scale * 125);
+    innerQueue.setAttribute('x', String(300 - innerWidth));
+    innerQueue.setAttribute('width', String(innerWidth));
+    eightyQueue.setAttribute('height', String(eightyHeight));
+    setSignal(innerSignal, phase === 'clearance' ? 'clearance' : phase === 'inner_ring_road' ? 'green' : 'red');
+    setSignal(eightySignal, phase === 'clearance' ? 'clearance' : phase === 'koramangala_80_feet_road' ? 'green' : 'red');
+    innerCount.textContent = `${inner} vehicles · oldest ${innerWait}s`;
+    eightyCount.textContent = `${eighty} vehicles · oldest ${eightyWait}s`;
+    timeLabel.textContent = `${String(Math.floor(seconds / 60)).padStart(2,'0')}:${String(seconds % 60).padStart(2,'0')}`;
+    const phaseText = phase === 'clearance' ? 'Clearance interval' : phase === 'inner_ring_road' ? 'Inner Ring Road green' : '80 Feet Road green';
+    live.textContent = `${labels[controller.value]} · ${phaseText}`;
+  }
+
+  function loadRun() {
+    stop();
+    run = DATA.runs[runKey()];
+    slider.max = String(run.trace.length - 1);
+    slider.value = '0';
+    root.querySelector('#sw-mean-wait').textContent = fmt(run.summary.average_wait_s);
+    root.querySelector('#sw-p95-wait').textContent = fmt(run.summary.p95_wait_s);
+    root.querySelector('#sw-max-queue').textContent = `${run.summary.maximum_queue_vehicles} vehicles`;
+    scenarioName.textContent = scenario.options[scenario.selectedIndex].textContent;
+    scenarioDescription.textContent = scenarioDescriptions[scenario.value];
+    controllerName.textContent = labels[controller.value];
+    controllerDescription.textContent = controllerDescriptions[controller.value];
+    renderComparison();
+    renderOverall();
+    renderFrame();
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    play.textContent = 'Play';
+    play.setAttribute('aria-pressed', 'false');
+  }
+
+  play.addEventListener('click', () => {
+    if (timer) { stop(); return; }
+    play.textContent = 'Pause';
+    play.setAttribute('aria-pressed', 'true');
+    timer = setInterval(() => {
+      const next = Number(slider.value) + 1;
+      if (next > Number(slider.max)) { stop(); return; }
+      slider.value = String(next);
+      renderFrame();
+    }, 180);
+  });
+  slider.addEventListener('input', renderFrame);
+  scenario.addEventListener('change', loadRun);
+  controller.addEventListener('change', loadRun);
+  replicate.addEventListener('change', loadRun);
+  loadRun();
+})();
+</script>

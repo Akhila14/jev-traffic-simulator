@@ -110,6 +110,9 @@ OPENROUTER_API_KEY=... \
   python3 run_experiment.py --replicates 3 --workers 12 --output-dir results-live
 
 python3 analyze_results.py results-live
+
+# Rebuild the replay fragment after changing results or its template
+python3 build_visual.py results-r3 visual-template.html replay-fragment.html
 ```
 
 ## View and record locally
@@ -128,6 +131,8 @@ Important files:
 - [`sony_signal_sim.py`](sony_signal_sim.py): simulator, safety envelope, controllers, and Jev client.
 - [`run_experiment.py`](run_experiment.py): replicated experiment runner.
 - [`analyze_results.py`](analyze_results.py): aggregate JSON/CSV generation.
+- [`build_visual.py`](build_visual.py): embed saved results in the replay template.
+- [`visual-template.html`](visual-template.html): editable replay interface.
 - [`test_simulator.py`](test_simulator.py): deterministic and safety tests.
 - [`results-r3/aggregate.json`](results-r3/aggregate.json): summarized results.
 - [`results-r3/summary.json`](results-r3/summary.json): all 36 run summaries and Jev decisions.

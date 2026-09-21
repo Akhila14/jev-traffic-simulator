@@ -1016,6 +1016,11 @@ html&gt;body{padding:0}&lt;/style&gt;
     &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; id=&quot;sw-play&quot; aria-pressed=&quot;false&quot;&gt;Play&lt;/button&gt;
   &lt;/div&gt;
 
+  &lt;div class=&quot;sw-context&quot; aria-live=&quot;polite&quot;&gt;
+    &lt;div&gt;&lt;strong id=&quot;sw-scenario-name&quot;&gt;Morning peak&lt;/strong&gt; — &lt;span id=&quot;sw-scenario-description&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;strong id=&quot;sw-controller-name&quot;&gt;Jev · raw JSON&lt;/strong&gt; — &lt;span id=&quot;sw-controller-description&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
   &lt;div class=&quot;viz-grid sw-stats&quot; aria-label=&quot;Selected run metrics&quot;&gt;
     &lt;div class=&quot;card viz-stat&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;Mean wait&lt;/span&gt;&lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;sw-mean-wait&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;card viz-stat&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;P95 wait&lt;/span&gt;&lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;sw-p95-wait&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
@@ -1051,11 +1056,23 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;tbody id=&quot;sw-comparison&quot;&gt;&lt;/tbody&gt;
     &lt;/table&gt;
   &lt;/div&gt;
+
+  &lt;section class=&quot;sw-outcome&quot; aria-labelledby=&quot;sw-outcome-title&quot;&gt;
+    &lt;h3 id=&quot;sw-outcome-title&quot;&gt;Experiment outcome · all scenarios and seeds&lt;/h3&gt;
+    &lt;div class=&quot;text-small text-muted&quot;&gt;36 runs · 558 live Jev decisions · total inference cost $0.0124&lt;/div&gt;
+    &lt;div class=&quot;table-responsive&quot;&gt;
+      &lt;table class=&quot;table table-sm&quot; aria-label=&quot;Overall controller results across all scenarios and seeds&quot;&gt;
+        &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Controller&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean wait&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;P95 wait&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean queue&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Max queue&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Jev confidence&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+        &lt;tbody id=&quot;sw-overall&quot;&gt;&lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
 &lt;/div&gt;
 
 &lt;style&gt;
   #sony-world-traffic-simulation { width: 100%; color: var(--foreground); }
   #sony-world-traffic-simulation .sw-stats { margin-block: 12px; }
+  #sony-world-traffic-simulation .sw-context { margin-top: 10px; padding-left: 10px; border-left: 3px solid var(--accent); font-size: 13px; line-height: 1.55; }
   #sony-world-traffic-simulation .sw-junction { width: 100%; display: block; }
   #sony-world-traffic-simulation .sw-road { fill: color-mix(in srgb, var(--foreground) 9%, transparent); }
   #sony-world-traffic-simulation .sw-lane { stroke: var(--border); stroke-width: 2; stroke-dasharray: 12 10; }
@@ -1069,6 +1086,10 @@ html&gt;body{padding:0}&lt;/style&gt;
   #sony-world-traffic-simulation .sw-timeline { display: block; margin-top: 8px; }
   #sony-world-traffic-simulation .sw-live { min-height: 20px; text-align: center; }
   #sony-world-traffic-simulation tr.is-selected { background: color-mix(in srgb, var(--accent) 55%, transparent); }
+  #sony-world-traffic-simulation .sw-outcome { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
+  #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 3px; font-size: 16px; }
+  #sony-world-traffic-simulation .sw-outcome .table-responsive { margin-top: 8px; }
+  #sony-world-traffic-simulation .sw-outcome tr.is-jev { font-weight: 650; }
   @media (max-width: 520px) {
     #sony-world-traffic-simulation .sw-junction { margin-top: 4px; }
   }
@@ -1092,7 +1113,23 @@ html&gt;body{padding:0}&lt;/style&gt;
   const timeLabel = root.querySelector(&#x27;#sw-time&#x27;);
   const live = root.querySelector(&#x27;#sw-live&#x27;);
   const comparison = root.querySelector(&#x27;#sw-comparison&#x27;);
+  const overall = root.querySelector(&#x27;#sw-overall&#x27;);
+  const scenarioName = root.querySelector(&#x27;#sw-scenario-name&#x27;);
+  const scenarioDescription = root.querySelector(&#x27;#sw-scenario-description&#x27;);
+  const controllerName = root.querySelector(&#x27;#sw-controller-name&#x27;);
+  const controllerDescription = root.querySelector(&#x27;#sw-controller-description&#x27;);
   const labels = {fixed_time:&#x27;Fixed time&#x27;,max_pressure:&#x27;Max pressure&#x27;,jev_raw:&#x27;Jev · raw JSON&#x27;,jev_prose:&#x27;Jev · prose&#x27;};
+  const scenarioDescriptions = {
+    morning_peak: &#x27;heavier Inner Ring Road demand, followed by a smaller 80 Feet Road surge.&#x27;,
+    evening_peak: &#x27;demand grows on Koramangala 80 Feet Road.&#x27;,
+    rain_and_blockage: &#x27;lower wet-weather capacity, a temporary blockage and an emergency vehicle.&#x27;
+  };
+  const controllerDescriptions = {
+    fixed_time: &#x27;ordinary code changes direction after 30 green seconds; it does not inspect traffic.&#x27;,
+    max_pressure: &#x27;ordinary code compares queue length and oldest wait, then serves the road under greater pressure.&#x27;,
+    jev_raw: &#x27;Jev receives numeric JSON: queues, waits, recent arrivals and current phase time.&#x27;,
+    jev_prose: &#x27;Jev receives the same state translated into phrases such as “heavy queue” or “long wait”.&#x27;
+  };
   let timer = null;
   let run = null;
 
@@ -1109,6 +1146,24 @@ html&gt;body{padding:0}&lt;/style&gt;
       const tr = document.createElement(&#x27;tr&#x27;);
       if (row.controller === controller.value) tr.className = &#x27;is-selected&#x27;;
       const values = [labels[row.controller], fmt(row.average_wait_s), fmt(row.p95_wait_s), Number(row.average_queue_vehicles).toFixed(1)];
+      values.forEach((value, index) =&gt; {
+        const cell = document.createElement(index === 0 ? &#x27;th&#x27; : &#x27;td&#x27;);
+        cell.textContent = value;
+        if (index &gt; 0) cell.className = &#x27;text-end&#x27;;
+        tr.appendChild(cell);
+      });
+      return tr;
+    }));
+  }
+
+  function renderOverall() {
+    const rank = {jev_raw:0, jev_prose:1, max_pressure:2, fixed_time:3};
+    const rows = [...DATA.aggregate.overall].sort((a, b) =&gt; rank[a.controller] - rank[b.controller]);
+    overall.replaceChildren(...rows.map(row =&gt; {
+      const tr = document.createElement(&#x27;tr&#x27;);
+      if (row.controller.startsWith(&#x27;jev_&#x27;)) tr.className = &#x27;is-jev&#x27;;
+      const confidence = row.average_confidence == null ? &#x27;—&#x27; : Number(row.average_confidence).toFixed(2);
+      const values = [labels[row.controller], `${Number(row.average_wait_s).toFixed(2)} s`, `${Number(row.p95_wait_s).toFixed(2)} s`, Number(row.average_queue_vehicles).toFixed(2), Number(row.maximum_queue_vehicles).toFixed(2), confidence];
       values.forEach((value, index) =&gt; {
         const cell = document.createElement(index === 0 ? &#x27;th&#x27; : &#x27;td&#x27;);
         cell.textContent = value;
@@ -1146,7 +1201,12 @@ html&gt;body{padding:0}&lt;/style&gt;
     root.querySelector(&#x27;#sw-mean-wait&#x27;).textContent = fmt(run.summary.average_wait_s);
     root.querySelector(&#x27;#sw-p95-wait&#x27;).textContent = fmt(run.summary.p95_wait_s);
     root.querySelector(&#x27;#sw-max-queue&#x27;).textContent = `${run.summary.maximum_queue_vehicles} vehicles`;
+    scenarioName.textContent = scenario.options[scenario.selectedIndex].textContent;
+    scenarioDescription.textContent = scenarioDescriptions[scenario.value];
+    controllerName.textContent = labels[controller.value];
+    controllerDescription.textContent = controllerDescriptions[controller.value];
     renderComparison();
+    renderOverall();
     renderFrame();
   }
 
