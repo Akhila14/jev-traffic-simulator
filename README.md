@@ -124,7 +124,7 @@ cd experiments/jev-traffic
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open [http://localhost:8000/](http://localhost:8000/) in a browser. Choose a scenario, controller, and arrival seed, move the time slider to the start, then press **Play**. For a clean screen recording, use a 16:9 browser window, hide bookmarks, and record the browser tab rather than the whole desktop.
+Open [http://localhost:8000/](http://localhost:8000/) in a browser. Choose a scenario, controller, and arrival seed, move the time slider to the start, then press **Play**. The recording layout is designed to fit at **1280×720 or larger**. Use a 16:9 browser window, hide bookmarks, and record the browser tab rather than the whole desktop. Narrow windows intentionally switch to a stacked mobile layout.
 
 Important files:
 
