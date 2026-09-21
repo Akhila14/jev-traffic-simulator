@@ -1,20 +1,28 @@
-<div id="sony-world-traffic-simulation">
+<div id="sony-world-traffic-simulation" class="sw-before-story">
   <header class="sw-header">
     <div class="sw-heading">
       <div class="sw-kicker">SYNTHETIC REPLAY · RECORDED JEV OUTPUT</div>
-      <h2>Sony World signal experiment</h2>
+      <h2>Can Jev make a better signal choice?</h2>
     </div>
     <div class="sw-controls" aria-label="Replay controls">
       <label>Scenario<select class="form-select" id="sw-scenario"><option value="morning_peak">Morning peak</option><option value="evening_peak">Evening peak</option><option value="rain_and_blockage">Rain + blockage</option></select></label>
-      <label>Controller<select class="form-select" id="sw-controller"><option value="fixed_time">Fixed time</option><option value="max_pressure">Max pressure</option><option value="jev_raw" selected>Jev · raw JSON</option><option value="jev_prose">Jev · prose</option></select></label>
+      <label>Controller<select class="form-select" id="sw-controller"><option value="fixed_time" selected>Fixed timer</option><option value="max_pressure">Queue rule</option><option value="jev_raw">Jev</option></select></label>
       <label>Seed<select class="form-select" id="sw-replicate"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
-      <button class="btn btn-primary" type="button" id="sw-play" aria-pressed="false">▶ Play</button>
+      <button class="btn" type="button" id="sw-play" aria-pressed="false">Play run</button>
+      <button class="btn btn-primary" type="button" id="sw-story" aria-pressed="false">▶ 15s story</button>
     </div>
   </header>
 
   <div class="sw-context" aria-live="polite">
     <div><span class="sw-context-label">Traffic</span><strong id="sw-scenario-name">Morning peak</strong><span id="sw-scenario-description"></span></div>
-    <div><span class="sw-context-label">Decision</span><strong id="sw-controller-name">Jev · raw JSON</strong><span id="sw-controller-description"></span></div>
+    <div><span class="sw-context-label">Method</span><strong id="sw-controller-name">Jev</strong><span id="sw-controller-description"></span></div>
+  </div>
+
+  <div class="sw-story-steps" aria-label="15 second comparison sequence">
+    <span data-step="fixed_time"><b>1</b> Fixed timer</span>
+    <span data-step="max_pressure"><b>2</b> Queue rule</span>
+    <span data-step="jev_raw"><b>3</b> Jev</span>
+    <span data-step="result"><b>4</b> Result</span>
   </div>
 
   <main class="sw-main">
@@ -41,13 +49,13 @@
     </section>
 
     <aside class="sw-panel">
-      <div class="sw-panel-heading"><div><span>SELECTED RUN</span><strong id="sw-run-label">Morning peak · seed 1</strong></div><span class="sw-mode" id="sw-mode">JEV</span></div>
+      <div class="sw-panel-heading"><div><span>SCENARIO RESULT</span><strong id="sw-run-label">Morning peak · average of 3 seeds</strong></div><span class="sw-mode" id="sw-mode">Replay seed 1</span></div>
       <div class="sw-stats" aria-label="Selected run metrics">
         <div><span>Mean wait</span><strong class="tabular-nums" id="sw-mean-wait">—</strong></div>
         <div><span>P95 wait</span><strong class="tabular-nums" id="sw-p95-wait">—</strong></div>
         <div><span>Max queue</span><strong class="tabular-nums" id="sw-max-queue">—</strong></div>
       </div>
-      <h3>Same traffic, four controllers</h3>
+      <h3>Same traffic, different decision methods</h3>
       <div class="table-responsive">
         <table class="table table-sm" aria-label="Controller comparison for selected scenario">
           <thead><tr><th>Controller</th><th class="text-end">Mean wait</th><th class="text-end">P95</th><th class="text-end">Queue</th></tr></thead>
@@ -58,7 +66,7 @@
   </main>
 
   <section class="sw-outcome" aria-labelledby="sw-outcome-title">
-    <div class="sw-outcome-copy"><h3 id="sw-outcome-title">Overall result</h3><span>3 scenarios × 3 seeds · 558 live Jev decisions · $0.0124</span></div>
+    <div class="sw-outcome-copy"><h3 id="sw-outcome-title">Overall average wait</h3><span>3 scenarios × 3 seeds · 558 Jev decisions · $0.0124</span></div>
     <div class="sw-result-list" id="sw-overall" aria-label="Overall controller results across all scenarios and seeds"></div>
   </section>
 </div>
@@ -74,11 +82,16 @@
   #sony-world-traffic-simulation .sw-controls .form-select { min-width: 130px; height: 32px; padding-block: 2px; font-size: 12px; text-transform: none; letter-spacing: normal; }
   #sony-world-traffic-simulation .sw-controls label:nth-child(3) .form-select { min-width: 64px; }
   #sony-world-traffic-simulation .sw-controls .btn { height: 32px; min-width: 76px; }
+  #sony-world-traffic-simulation #sw-story { min-width: 102px; }
   #sony-world-traffic-simulation .sw-context { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 7px 10px; border: 1px solid var(--border); background: color-mix(in srgb, var(--foreground) 3%, transparent); }
   #sony-world-traffic-simulation .sw-context > div { display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; gap: 7px; min-width: 0; }
   #sony-world-traffic-simulation .sw-context-label { color: var(--muted-foreground); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   #sony-world-traffic-simulation .sw-context strong { white-space: nowrap; }
   #sony-world-traffic-simulation .sw-context strong + span { color: var(--muted-foreground); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #sony-world-traffic-simulation .sw-story-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 7px; }
+  #sony-world-traffic-simulation .sw-story-steps span { padding: 5px 8px; border-bottom: 2px solid var(--border); color: var(--muted-foreground); font-size: 10px; font-weight: 650; text-align: center; }
+  #sony-world-traffic-simulation .sw-story-steps b { display: inline-grid; place-items: center; width: 16px; height: 16px; margin-right: 4px; border: 1px solid currentColor; border-radius: 50%; font-size: 9px; }
+  #sony-world-traffic-simulation .sw-story-steps span.is-active { border-bottom-color: var(--viz-series-1); color: var(--foreground); }
   #sony-world-traffic-simulation .sw-main { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(330px, .8fr); gap: 12px; margin-top: 10px; }
   #sony-world-traffic-simulation .sw-stage, #sony-world-traffic-simulation .sw-panel { min-width: 0; border: 1px solid var(--border); background: color-mix(in srgb, var(--foreground) 2%, transparent); }
   #sony-world-traffic-simulation .sw-stage { padding: 5px 10px 7px; }
@@ -109,9 +122,14 @@
   #sony-world-traffic-simulation .sw-panel .table :is(th, td) { padding-block: 4px; }
   #sony-world-traffic-simulation tr.is-selected { background: color-mix(in srgb, var(--accent) 55%, transparent); }
   #sony-world-traffic-simulation .sw-outcome { display: grid; grid-template-columns: 170px 1fr; gap: 14px; align-items: center; margin-top: 10px; padding: 9px 11px; border: 1px solid var(--border); }
+  #sony-world-traffic-simulation .sw-outcome.is-focus { border-color: var(--viz-series-1); box-shadow: inset 0 0 0 1px var(--viz-series-1); }
+  #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome { position: relative; overflow: hidden; }
+  #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-result-list { opacity: .12; filter: blur(3px); }
+  #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome::after { position: absolute; inset: 0 0 0 184px; display: grid; place-items: center; background: color-mix(in srgb, var(--background) 82%, transparent); font-size: 13px; font-weight: 650; content: 'Same traffic. Three ways to choose the green.'; }
+  #sony-world-traffic-simulation.sw-before-story .sw-outcome::after { content: 'Press “15s story” to reveal the comparison.'; }
   #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 2px; font-size: 15px; }
   #sony-world-traffic-simulation .sw-outcome-copy span { color: var(--muted-foreground); font-size: 10px; }
-  #sony-world-traffic-simulation .sw-result-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+  #sony-world-traffic-simulation .sw-result-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
   #sony-world-traffic-simulation .sw-result { min-width: 0; padding-left: 8px; border-left: 3px solid var(--border); }
   #sony-world-traffic-simulation .sw-result.is-jev { border-left-color: var(--viz-series-1); }
   #sony-world-traffic-simulation .sw-result-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; font-weight: 650; }
@@ -125,6 +143,7 @@
     #sony-world-traffic-simulation .sw-context, #sony-world-traffic-simulation .sw-main { grid-template-columns: 1fr; }
     #sony-world-traffic-simulation .sw-context strong + span { white-space: normal; }
     #sony-world-traffic-simulation .sw-outcome { grid-template-columns: 1fr; }
+    #sony-world-traffic-simulation:is(.sw-before-story, .sw-story-running) .sw-outcome::after { inset: 54px 0 0; }
     #sony-world-traffic-simulation .sw-result-list { grid-template-columns: 1fr 1fr; }
     #sony-world-traffic-simulation .sw-junction { height: auto; }
   }
@@ -139,6 +158,7 @@
   const replicate = root.querySelector('#sw-replicate');
   const slider = root.querySelector('#sw-slider');
   const play = root.querySelector('#sw-play');
+  const story = root.querySelector('#sw-story');
   const innerQueue = root.querySelector('#sw-inner-queue');
   const eightyQueue = root.querySelector('#sw-eighty-queue');
   const innerSignal = root.querySelector('#sw-inner-signal');
@@ -153,19 +173,21 @@
   const scenarioDescription = root.querySelector('#sw-scenario-description');
   const controllerName = root.querySelector('#sw-controller-name');
   const controllerDescription = root.querySelector('#sw-controller-description');
-  const labels = {fixed_time:'Fixed time',max_pressure:'Max pressure',jev_raw:'Jev · raw JSON',jev_prose:'Jev · prose'};
+  const labels = {fixed_time:'Fixed timer',max_pressure:'Queue rule',jev_raw:'Jev',jev_prose:'Jev · words'};
   const scenarioDescriptions = {
-    morning_peak: 'heavier Inner Ring Road demand, followed by a smaller 80 Feet Road surge.',
+    morning_peak: 'more traffic enters from Inner Ring Road.',
     evening_peak: 'demand grows on Koramangala 80 Feet Road.',
     rain_and_blockage: 'lower wet-weather capacity, a temporary blockage and an emergency vehicle.'
   };
   const controllerDescriptions = {
-    fixed_time: 'Switches every 30 green seconds without inspecting traffic.',
-    max_pressure: 'Code compares queue length and oldest wait, then serves the greater pressure.',
-    jev_raw: 'Jev reads queues, waits, arrivals and signal phase as numeric JSON.',
-    jev_prose: 'Jev reads the same state as phrases such as “heavy queue” and “long wait”.'
+    fixed_time: 'A clock switches every 30 seconds, even when traffic is uneven.',
+    max_pressure: 'A hand-written rule serves the road with the larger queue and longest wait.',
+    jev_raw: 'Jev sees each queue, longest wait and current green, then picks 1 of 3 actions.',
+    jev_prose: 'Jev sees the same traffic snapshot rewritten as short phrases such as “heavy queue” and “long wait”.'
   };
   let timer = null;
+  let storyTimers = [];
+  let storyActive = false;
   let run = null;
 
   const runKey = () => `${scenario.value}--${controller.value}--r${replicate.value}`;
@@ -176,7 +198,10 @@
   }
 
   function renderComparison() {
-    const rows = DATA.aggregate.aggregate_by_scenario.filter(row => row.scenario === scenario.value);
+    const order = {fixed_time:0, max_pressure:1, jev_raw:2};
+    const rows = DATA.aggregate.aggregate_by_scenario
+      .filter(row => row.scenario === scenario.value && row.controller in order)
+      .sort((a, b) => order[a.controller] - order[b.controller]);
     comparison.replaceChildren(...rows.map(row => {
       const tr = document.createElement('tr');
       if (row.controller === controller.value) tr.className = 'is-selected';
@@ -192,8 +217,8 @@
   }
 
   function renderOverall() {
-    const rank = {jev_raw:0, jev_prose:1, max_pressure:2, fixed_time:3};
-    const rows = [...DATA.aggregate.overall].sort((a, b) => rank[a.controller] - rank[b.controller]);
+    const rank = {jev_raw:0, max_pressure:1, fixed_time:2};
+    const rows = DATA.aggregate.overall.filter(row => row.controller in rank).sort((a, b) => rank[a.controller] - rank[b.controller]);
     overall.replaceChildren(...rows.map(row => {
       const item = document.createElement('div');
       item.className = `sw-result${row.controller.startsWith('jev_') ? ' is-jev' : ''}`;
@@ -206,7 +231,7 @@
       value.textContent = `${Number(row.average_wait_s).toFixed(2)} s`;
       const meta = document.createElement('span');
       meta.className = 'sw-result-meta';
-      meta.textContent = `P95 ${Number(row.p95_wait_s).toFixed(2)} · queue ${Number(row.average_queue_vehicles).toFixed(2)}${confidence === '—' ? '' : ` · conf ${confidence}`}`;
+      meta.textContent = `P95 ${Number(row.p95_wait_s).toFixed(2)} · avg queue ${Number(row.average_queue_vehicles).toFixed(2)}${confidence === '—' ? '' : ` · confidence ${confidence}`}`;
       item.append(name, value, meta);
       return item;
     }));
@@ -231,16 +256,17 @@
     live.textContent = `${labels[controller.value]} · ${phaseText}`;
   }
 
-  function loadRun() {
-    stop();
+  function loadRun(shouldStop = true) {
+    if (shouldStop) stop();
     run = DATA.runs[runKey()];
     slider.max = String(run.trace.length - 1);
     slider.value = '0';
-    root.querySelector('#sw-mean-wait').textContent = fmt(run.summary.average_wait_s);
-    root.querySelector('#sw-p95-wait').textContent = fmt(run.summary.p95_wait_s);
-    root.querySelector('#sw-max-queue').textContent = `${run.summary.maximum_queue_vehicles} vehicles`;
-    root.querySelector('#sw-run-label').textContent = `${scenario.options[scenario.selectedIndex].textContent} · seed ${replicate.value}`;
-    root.querySelector('#sw-mode').textContent = controller.value.startsWith('jev_') ? 'JEV' : 'CODE';
+    const scenarioResult = DATA.aggregate.aggregate_by_scenario.find(row => row.scenario === scenario.value && row.controller === controller.value);
+    root.querySelector('#sw-mean-wait').textContent = fmt(scenarioResult.average_wait_s);
+    root.querySelector('#sw-p95-wait').textContent = fmt(scenarioResult.p95_wait_s);
+    root.querySelector('#sw-max-queue').textContent = `${Number(scenarioResult.maximum_queue_vehicles).toFixed(1)} vehicles`;
+    root.querySelector('#sw-run-label').textContent = `${scenario.options[scenario.selectedIndex].textContent} · average of 3 seeds`;
+    root.querySelector('#sw-mode').textContent = `Replay seed ${replicate.value}`;
     scenarioName.textContent = scenario.options[scenario.selectedIndex].textContent;
     scenarioDescription.textContent = scenarioDescriptions[scenario.value];
     controllerName.textContent = labels[controller.value];
@@ -252,14 +278,78 @@
 
   function stop() {
     if (timer) clearInterval(timer);
+    storyTimers.forEach(id => clearTimeout(id));
+    storyTimers = [];
     timer = null;
-    play.textContent = '▶ Play';
+    storyActive = false;
+    play.textContent = 'Play run';
     play.setAttribute('aria-pressed', 'false');
+    story.textContent = '▶ 15s story';
+    story.setAttribute('aria-pressed', 'false');
+    [scenario, controller, replicate, play].forEach(element => { element.disabled = false; });
+    root.querySelectorAll('.sw-story-steps span').forEach(element => element.classList.remove('is-active'));
+    root.querySelector('.sw-outcome').classList.remove('is-focus');
+    root.classList.remove('sw-story-running');
+  }
+
+  function activateStoryStep(step) {
+    root.querySelectorAll('.sw-story-steps span').forEach(element => element.classList.toggle('is-active', element.dataset.step === step));
+  }
+
+  function startStory() {
+    stop();
+    storyActive = true;
+    root.classList.remove('sw-before-story');
+    root.classList.add('sw-story-running');
+    story.textContent = 'Stop story';
+    story.setAttribute('aria-pressed', 'true');
+    scenario.value = 'morning_peak';
+    replicate.value = '1';
+    [scenario, controller, replicate, play].forEach(element => { element.disabled = true; });
+    const stages = [
+      {controller:'fixed_time', start:18},
+      {controller:'max_pressure', start:18},
+      {controller:'jev_raw', start:18}
+    ];
+
+    function runStage(index) {
+      if (!storyActive) return;
+      const stage = stages[index];
+      controller.value = stage.controller;
+      loadRun(false);
+      slider.value = String(stage.start);
+      renderFrame();
+      activateStoryStep(stage.controller);
+      timer = setInterval(() => {
+        const next = Math.min(Number(slider.max), Number(slider.value) + 2);
+        slider.value = String(next);
+        renderFrame();
+      }, 130);
+      storyTimers.push(setTimeout(() => {
+        clearInterval(timer);
+        timer = null;
+        if (index < stages.length - 1) {
+          runStage(index + 1);
+        } else {
+          activateStoryStep('result');
+          root.classList.remove('sw-story-running');
+          root.querySelector('.sw-outcome').classList.add('is-focus');
+          live.textContent = 'Overall: Jev 24.15 s · queue rule 25.09 s · fixed timer 33.42 s';
+          storyTimers.push(setTimeout(() => {
+            storyActive = false;
+            story.textContent = '↻ Replay 15s';
+            story.setAttribute('aria-pressed', 'false');
+            [scenario, controller, replicate, play].forEach(element => { element.disabled = false; });
+          }, 3200));
+        }
+      }, 3600));
+    }
+    runStage(0);
   }
 
   play.addEventListener('click', () => {
     if (timer) { stop(); return; }
-    play.textContent = 'Ⅱ Pause';
+    play.textContent = 'Pause';
     play.setAttribute('aria-pressed', 'true');
     timer = setInterval(() => {
       const next = Number(slider.value) + 1;
@@ -268,10 +358,14 @@
       renderFrame();
     }, 180);
   });
+  story.addEventListener('click', () => {
+    if (storyActive) { stop(); loadRun(false); return; }
+    startStory();
+  });
   slider.addEventListener('input', renderFrame);
-  scenario.addEventListener('change', loadRun);
-  controller.addEventListener('change', loadRun);
-  replicate.addEventListener('change', loadRun);
+  scenario.addEventListener('change', () => loadRun());
+  controller.addEventListener('change', () => loadRun());
+  replicate.addEventListener('change', () => loadRun());
   loadRun();
 })();
 </script>

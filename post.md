@@ -1,44 +1,32 @@
-# LinkedIn draft
+I tried Jev on a small decision we would normally solve with control logic: which side of a traffic signal should get the green light next?
 
-TypeSafe's Jev doesn't generate text. You give it state and a typed question; it returns one of the allowed answers with probabilities.
+I built a synthetic two-road simulation inspired by Sony World Junction in Bengaluru.
 
-So I gave it a simulated version of a very Bengaluru problem: deciding who gets the green light at Sony World Signal in Koramangala.
+Every 15 simulated seconds, Jev received a small traffic snapshot:
 
-Every 15 simulated seconds, Jev had three choices:
+- how many vehicles were waiting on each road;
+- how long the oldest vehicle had waited;
+- recent arrivals;
+- which road currently had green.
 
-```text
-serve_inner_ring_road
-serve_80_feet_road
-extend_current
-```
+It could choose only one of three actions: keep the current green, serve Inner Ring Road, or serve 80 Feet Road.
 
-I tested two ways of describing the same junction.
-
-One sent raw JSON: queue lengths, oldest wait, recent arrivals, and the current signal phase.
-
-The other translated that state into ordinary language: one road has a heavy queue, the opposing road is moving normally, and the current green has already served for a long time.
-
-I ran three traffic scenarios—morning peak, evening peak, and rain with a temporary blockage—across three different arrival seeds. That produced 558 live Jev decisions.
-
-The comparison:
+I compared it with a fixed timer and a hand-written queue rule.
 
 ```text
-Fixed-time signal       33.42 s average wait
-Max-pressure heuristic  25.09 s
-Jev with prose          24.50 s
-Jev with raw JSON       24.15 s
+Jev                 24.15 s average wait
+Queue-based rule    25.09 s
+Fixed timer         33.42 s
 ```
 
-Raw numbers did not confuse it. In this simulation they produced the lowest average wait. The prose version had the lowest P95 wait and higher confidence, while using fewer input tokens.
+That 0.94-second difference between Jev and the queue rule is too small to declare a winner. The more useful result is that Jev stayed close to a purpose-built deterministic rule while returning a typed decision and probabilities that code could use directly.
 
-All 558 decisions cost about 1.24 cents through OpenRouter.
+Safety remained ordinary code: minimum green time, clearance, starvation prevention and emergency priority were never delegated to the model.
 
-The part I would keep in any real control system is the boundary: Jev requested the next phase, but deterministic code enforced minimum green time, clearance, starvation prevention, and emergency priority.
+The experiment covered 36 runs and 558 live Jev decisions. Total inference cost was about 1.24 cents.
 
-This was a synthetic two-road model inspired by Sony World Junction—not a model of the real signal and definitely not a deployment proposal.
+This is a synthetic experiment—not real Sony World traffic data or a proposal to operate a traffic signal.
 
-But it showed something useful: typed decision models are not limited to routing emails or tickets. Put them inside a well-defined state machine, keep safety rules in code, and they can make repeated operational choices without generating a single paragraph.
+Experiment and source: https://github.com/Akhila14/jev-traffic-simulator
 
 Jev documentation: https://docs.typesafe.ai/introduction
-
-Experiment source and replay: https://github.com/Akhila14/jev-traffic-simulator
