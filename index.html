@@ -989,91 +989,90 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;sony-world-traffic-simulation&quot;&gt;
-  &lt;h2&gt;Sony World-inspired signal replay&lt;/h2&gt;
-  &lt;div class=&quot;viz-controls&quot; aria-label=&quot;Replay controls&quot;&gt;
-    &lt;label class=&quot;form-label&quot;&gt;Scenario
-      &lt;select class=&quot;form-select&quot; id=&quot;sw-scenario&quot;&gt;
-        &lt;option value=&quot;morning_peak&quot;&gt;Morning peak&lt;/option&gt;
-        &lt;option value=&quot;evening_peak&quot;&gt;Evening peak&lt;/option&gt;
-        &lt;option value=&quot;rain_and_blockage&quot;&gt;Rain + blockage&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/label&gt;
-    &lt;label class=&quot;form-label&quot;&gt;Controller
-      &lt;select class=&quot;form-select&quot; id=&quot;sw-controller&quot;&gt;
-        &lt;option value=&quot;fixed_time&quot;&gt;Fixed time&lt;/option&gt;
-        &lt;option value=&quot;max_pressure&quot;&gt;Max pressure&lt;/option&gt;
-        &lt;option value=&quot;jev_raw&quot; selected&gt;Jev · raw JSON&lt;/option&gt;
-        &lt;option value=&quot;jev_prose&quot;&gt;Jev · prose&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/label&gt;
-    &lt;label class=&quot;form-label&quot;&gt;Arrival seed
-      &lt;select class=&quot;form-select&quot; id=&quot;sw-replicate&quot;&gt;
-        &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
-        &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
-        &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/label&gt;
-    &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; id=&quot;sw-play&quot; aria-pressed=&quot;false&quot;&gt;Play&lt;/button&gt;
-  &lt;/div&gt;
+  &lt;header class=&quot;sw-header&quot;&gt;
+    &lt;div class=&quot;sw-heading&quot;&gt;
+      &lt;div class=&quot;sw-kicker&quot;&gt;SYNTHETIC REPLAY · RECORDED JEV OUTPUT&lt;/div&gt;
+      &lt;h2&gt;Sony World signal experiment&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;sw-controls&quot; aria-label=&quot;Replay controls&quot;&gt;
+      &lt;label&gt;Scenario&lt;select class=&quot;form-select&quot; id=&quot;sw-scenario&quot;&gt;&lt;option value=&quot;morning_peak&quot;&gt;Morning peak&lt;/option&gt;&lt;option value=&quot;evening_peak&quot;&gt;Evening peak&lt;/option&gt;&lt;option value=&quot;rain_and_blockage&quot;&gt;Rain + blockage&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
+      &lt;label&gt;Controller&lt;select class=&quot;form-select&quot; id=&quot;sw-controller&quot;&gt;&lt;option value=&quot;fixed_time&quot;&gt;Fixed time&lt;/option&gt;&lt;option value=&quot;max_pressure&quot;&gt;Max pressure&lt;/option&gt;&lt;option value=&quot;jev_raw&quot; selected&gt;Jev · raw JSON&lt;/option&gt;&lt;option value=&quot;jev_prose&quot;&gt;Jev · prose&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
+      &lt;label&gt;Seed&lt;select class=&quot;form-select&quot; id=&quot;sw-replicate&quot;&gt;&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
+      &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; id=&quot;sw-play&quot; aria-pressed=&quot;false&quot;&gt;▶ Play&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
 
   &lt;div class=&quot;sw-context&quot; aria-live=&quot;polite&quot;&gt;
-    &lt;div&gt;&lt;strong id=&quot;sw-scenario-name&quot;&gt;Morning peak&lt;/strong&gt; — &lt;span id=&quot;sw-scenario-description&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;strong id=&quot;sw-controller-name&quot;&gt;Jev · raw JSON&lt;/strong&gt; — &lt;span id=&quot;sw-controller-description&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;span class=&quot;sw-context-label&quot;&gt;Traffic&lt;/span&gt;&lt;strong id=&quot;sw-scenario-name&quot;&gt;Morning peak&lt;/strong&gt;&lt;span id=&quot;sw-scenario-description&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;span class=&quot;sw-context-label&quot;&gt;Decision&lt;/span&gt;&lt;strong id=&quot;sw-controller-name&quot;&gt;Jev · raw JSON&lt;/strong&gt;&lt;span id=&quot;sw-controller-description&quot;&gt;&lt;/span&gt;&lt;/div&gt;
   &lt;/div&gt;
 
-  &lt;div class=&quot;viz-grid sw-stats&quot; aria-label=&quot;Selected run metrics&quot;&gt;
-    &lt;div class=&quot;card viz-stat&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;Mean wait&lt;/span&gt;&lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;sw-mean-wait&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;card viz-stat&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;P95 wait&lt;/span&gt;&lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;sw-p95-wait&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;card viz-stat&quot;&gt;&lt;span class=&quot;text-muted&quot;&gt;Maximum queue&lt;/span&gt;&lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;sw-max-queue&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
-  &lt;/div&gt;
+  &lt;main class=&quot;sw-main&quot;&gt;
+    &lt;section class=&quot;sw-stage&quot; aria-label=&quot;Signal replay&quot;&gt;
+      &lt;svg class=&quot;sw-junction&quot; viewBox=&quot;0 0 720 390&quot; role=&quot;img&quot; aria-labelledby=&quot;sw-title sw-desc&quot;&gt;
+        &lt;title id=&quot;sw-title&quot;&gt;Simulated Sony World junction queues and signal phase&lt;/title&gt;
+        &lt;desc id=&quot;sw-desc&quot;&gt;A two-corridor schematic showing queue sizes on Inner Ring Road and Koramangala 80 Feet Road over simulated time.&lt;/desc&gt;
+        &lt;rect class=&quot;sw-road&quot; x=&quot;35&quot; y=&quot;145&quot; width=&quot;650&quot; height=&quot;100&quot;&gt;&lt;/rect&gt;
+        &lt;rect class=&quot;sw-road&quot; x=&quot;310&quot; y=&quot;15&quot; width=&quot;100&quot; height=&quot;355&quot;&gt;&lt;/rect&gt;
+        &lt;line class=&quot;sw-lane&quot; x1=&quot;35&quot; y1=&quot;195&quot; x2=&quot;685&quot; y2=&quot;195&quot;&gt;&lt;/line&gt;
+        &lt;line class=&quot;sw-lane&quot; x1=&quot;360&quot; y1=&quot;15&quot; x2=&quot;360&quot; y2=&quot;370&quot;&gt;&lt;/line&gt;
+        &lt;text class=&quot;sw-label&quot; x=&quot;48&quot; y=&quot;130&quot;&gt;Inner Ring Road / 100 Feet Road&lt;/text&gt;
+        &lt;text class=&quot;sw-label&quot; x=&quot;425&quot; y=&quot;355&quot;&gt;Koramangala 80 Feet Road&lt;/text&gt;
+        &lt;rect class=&quot;sw-queue sw-inner&quot; id=&quot;sw-inner-queue&quot; x=&quot;300&quot; y=&quot;164&quot; width=&quot;0&quot; height=&quot;24&quot;&gt;&lt;/rect&gt;
+        &lt;rect class=&quot;sw-queue sw-eighty&quot; id=&quot;sw-eighty-queue&quot; x=&quot;376&quot; y=&quot;255&quot; width=&quot;24&quot; height=&quot;0&quot;&gt;&lt;/rect&gt;
+        &lt;circle class=&quot;sw-signal&quot; id=&quot;sw-inner-signal&quot; cx=&quot;292&quot; cy=&quot;176&quot; r=&quot;10&quot;&gt;&lt;/circle&gt;
+        &lt;circle class=&quot;sw-signal&quot; id=&quot;sw-eighty-signal&quot; cx=&quot;388&quot; cy=&quot;255&quot; r=&quot;10&quot;&gt;&lt;/circle&gt;
+        &lt;text class=&quot;sw-count tabular-nums&quot; id=&quot;sw-inner-count&quot; x=&quot;48&quot; y=&quot;227&quot;&gt;0 vehicles&lt;/text&gt;
+        &lt;text class=&quot;sw-count tabular-nums&quot; id=&quot;sw-eighty-count&quot; x=&quot;425&quot; y=&quot;335&quot;&gt;0 vehicles&lt;/text&gt;
+        &lt;text class=&quot;sw-time tabular-nums&quot; id=&quot;sw-time&quot; x=&quot;360&quot; y=&quot;385&quot; text-anchor=&quot;middle&quot;&gt;00:00&lt;/text&gt;
+      &lt;/svg&gt;
+      &lt;div class=&quot;sw-now&quot; id=&quot;sw-live&quot; aria-live=&quot;polite&quot;&gt;Ready&lt;/div&gt;
+      &lt;label class=&quot;sw-timeline&quot;&gt;&lt;span&gt;00:00&lt;/span&gt;&lt;input class=&quot;form-range&quot; id=&quot;sw-slider&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;95&quot; value=&quot;0&quot; step=&quot;1&quot;&gt;&lt;span&gt;08:00&lt;/span&gt;&lt;/label&gt;
+    &lt;/section&gt;
 
-  &lt;svg class=&quot;sw-junction&quot; viewBox=&quot;0 0 720 430&quot; role=&quot;img&quot; aria-labelledby=&quot;sw-title sw-desc&quot;&gt;
-    &lt;title id=&quot;sw-title&quot;&gt;Simulated Sony World junction queues and signal phase&lt;/title&gt;
-    &lt;desc id=&quot;sw-desc&quot;&gt;A two-corridor schematic showing queue sizes on Inner Ring Road and Koramangala 80 Feet Road over simulated time.&lt;/desc&gt;
-    &lt;rect class=&quot;sw-road&quot; x=&quot;35&quot; y=&quot;165&quot; width=&quot;650&quot; height=&quot;100&quot;&gt;&lt;/rect&gt;
-    &lt;rect class=&quot;sw-road&quot; x=&quot;310&quot; y=&quot;25&quot; width=&quot;100&quot; height=&quot;380&quot;&gt;&lt;/rect&gt;
-    &lt;line class=&quot;sw-lane&quot; x1=&quot;35&quot; y1=&quot;215&quot; x2=&quot;685&quot; y2=&quot;215&quot;&gt;&lt;/line&gt;
-    &lt;line class=&quot;sw-lane&quot; x1=&quot;360&quot; y1=&quot;25&quot; x2=&quot;360&quot; y2=&quot;405&quot;&gt;&lt;/line&gt;
-    &lt;text class=&quot;sw-label&quot; x=&quot;48&quot; y=&quot;150&quot;&gt;Inner Ring Road / 100 Feet Road&lt;/text&gt;
-    &lt;text class=&quot;sw-label&quot; x=&quot;425&quot; y=&quot;390&quot;&gt;Koramangala 80 Feet Road&lt;/text&gt;
-    &lt;rect class=&quot;sw-queue sw-inner&quot; id=&quot;sw-inner-queue&quot; x=&quot;300&quot; y=&quot;184&quot; width=&quot;0&quot; height=&quot;24&quot;&gt;&lt;/rect&gt;
-    &lt;rect class=&quot;sw-queue sw-eighty&quot; id=&quot;sw-eighty-queue&quot; x=&quot;376&quot; y=&quot;275&quot; width=&quot;24&quot; height=&quot;0&quot;&gt;&lt;/rect&gt;
-    &lt;circle class=&quot;sw-signal&quot; id=&quot;sw-inner-signal&quot; cx=&quot;292&quot; cy=&quot;196&quot; r=&quot;10&quot;&gt;&lt;/circle&gt;
-    &lt;circle class=&quot;sw-signal&quot; id=&quot;sw-eighty-signal&quot; cx=&quot;388&quot; cy=&quot;275&quot; r=&quot;10&quot;&gt;&lt;/circle&gt;
-    &lt;text class=&quot;sw-count tabular-nums&quot; id=&quot;sw-inner-count&quot; x=&quot;48&quot; y=&quot;247&quot;&gt;0 vehicles&lt;/text&gt;
-    &lt;text class=&quot;sw-count tabular-nums&quot; id=&quot;sw-eighty-count&quot; x=&quot;425&quot; y=&quot;370&quot;&gt;0 vehicles&lt;/text&gt;
-    &lt;text class=&quot;sw-time tabular-nums&quot; id=&quot;sw-time&quot; x=&quot;360&quot; y=&quot;418&quot; text-anchor=&quot;middle&quot;&gt;00:00&lt;/text&gt;
-  &lt;/svg&gt;
-
-  &lt;label class=&quot;form-label sw-timeline&quot;&gt;Simulation time
-    &lt;input class=&quot;form-range&quot; id=&quot;sw-slider&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;95&quot; value=&quot;0&quot; step=&quot;1&quot;&gt;
-  &lt;/label&gt;
-  &lt;div class=&quot;text-small text-muted sw-live&quot; id=&quot;sw-live&quot; aria-live=&quot;polite&quot;&gt;Ready&lt;/div&gt;
-
-  &lt;div class=&quot;table-responsive&quot;&gt;
-    &lt;table class=&quot;table table-sm&quot; aria-label=&quot;Controller comparison for selected scenario&quot;&gt;
-      &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Controller&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean wait&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;P95&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean queue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-      &lt;tbody id=&quot;sw-comparison&quot;&gt;&lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/div&gt;
+    &lt;aside class=&quot;sw-panel&quot;&gt;
+      &lt;div class=&quot;sw-panel-heading&quot;&gt;&lt;div&gt;&lt;span&gt;SELECTED RUN&lt;/span&gt;&lt;strong id=&quot;sw-run-label&quot;&gt;Morning peak · seed 1&lt;/strong&gt;&lt;/div&gt;&lt;span class=&quot;sw-mode&quot; id=&quot;sw-mode&quot;&gt;JEV&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;sw-stats&quot; aria-label=&quot;Selected run metrics&quot;&gt;
+        &lt;div&gt;&lt;span&gt;Mean wait&lt;/span&gt;&lt;strong class=&quot;tabular-nums&quot; id=&quot;sw-mean-wait&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;span&gt;P95 wait&lt;/span&gt;&lt;strong class=&quot;tabular-nums&quot; id=&quot;sw-p95-wait&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;span&gt;Max queue&lt;/span&gt;&lt;strong class=&quot;tabular-nums&quot; id=&quot;sw-max-queue&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;h3&gt;Same traffic, four controllers&lt;/h3&gt;
+      &lt;div class=&quot;table-responsive&quot;&gt;
+        &lt;table class=&quot;table table-sm&quot; aria-label=&quot;Controller comparison for selected scenario&quot;&gt;
+          &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Controller&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean wait&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;P95&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Queue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+          &lt;tbody id=&quot;sw-comparison&quot;&gt;&lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
 
   &lt;section class=&quot;sw-outcome&quot; aria-labelledby=&quot;sw-outcome-title&quot;&gt;
-    &lt;h3 id=&quot;sw-outcome-title&quot;&gt;Experiment outcome · all scenarios and seeds&lt;/h3&gt;
-    &lt;div class=&quot;text-small text-muted&quot;&gt;36 runs · 558 live Jev decisions · total inference cost $0.0124&lt;/div&gt;
-    &lt;div class=&quot;table-responsive&quot;&gt;
-      &lt;table class=&quot;table table-sm&quot; aria-label=&quot;Overall controller results across all scenarios and seeds&quot;&gt;
-        &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Controller&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean wait&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;P95 wait&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Mean queue&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Max queue&lt;/th&gt;&lt;th class=&quot;text-end&quot;&gt;Jev confidence&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-        &lt;tbody id=&quot;sw-overall&quot;&gt;&lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;sw-outcome-copy&quot;&gt;&lt;h3 id=&quot;sw-outcome-title&quot;&gt;Overall result&lt;/h3&gt;&lt;span&gt;3 scenarios × 3 seeds · 558 live Jev decisions · $0.0124&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;sw-result-list&quot; id=&quot;sw-overall&quot; aria-label=&quot;Overall controller results across all scenarios and seeds&quot;&gt;&lt;/div&gt;
   &lt;/section&gt;
 &lt;/div&gt;
 
 &lt;style&gt;
-  #sony-world-traffic-simulation { width: 100%; color: var(--foreground); }
-  #sony-world-traffic-simulation .sw-stats { margin-block: 12px; }
-  #sony-world-traffic-simulation .sw-context { margin-top: 10px; padding-left: 10px; border-left: 3px solid var(--accent); font-size: 13px; line-height: 1.55; }
-  #sony-world-traffic-simulation .sw-junction { width: 100%; display: block; }
+  #sony-world-traffic-simulation { width: 100%; max-width: 1400px; margin: 0 auto; color: var(--foreground); font-size: 13px; }
+  #sony-world-traffic-simulation * { box-sizing: border-box; }
+  #sony-world-traffic-simulation .sw-header { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 8px; }
+  #sony-world-traffic-simulation .sw-kicker { color: var(--muted-foreground); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+  #sony-world-traffic-simulation h2 { margin: 2px 0 0; font-size: clamp(20px, 2.2vw, 29px); line-height: 1; }
+  #sony-world-traffic-simulation .sw-controls { display: flex; align-items: end; gap: 8px; }
+  #sony-world-traffic-simulation .sw-controls label { display: grid; gap: 2px; color: var(--muted-foreground); font-size: 10px; font-weight: 650; text-transform: uppercase; letter-spacing: .05em; }
+  #sony-world-traffic-simulation .sw-controls .form-select { min-width: 130px; height: 32px; padding-block: 2px; font-size: 12px; text-transform: none; letter-spacing: normal; }
+  #sony-world-traffic-simulation .sw-controls label:nth-child(3) .form-select { min-width: 64px; }
+  #sony-world-traffic-simulation .sw-controls .btn { height: 32px; min-width: 76px; }
+  #sony-world-traffic-simulation .sw-context { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 7px 10px; border: 1px solid var(--border); background: color-mix(in srgb, var(--foreground) 3%, transparent); }
+  #sony-world-traffic-simulation .sw-context &gt; div { display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; gap: 7px; min-width: 0; }
+  #sony-world-traffic-simulation .sw-context-label { color: var(--muted-foreground); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  #sony-world-traffic-simulation .sw-context strong { white-space: nowrap; }
+  #sony-world-traffic-simulation .sw-context strong + span { color: var(--muted-foreground); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #sony-world-traffic-simulation .sw-main { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(330px, .8fr); gap: 12px; margin-top: 10px; }
+  #sony-world-traffic-simulation .sw-stage, #sony-world-traffic-simulation .sw-panel { min-width: 0; border: 1px solid var(--border); background: color-mix(in srgb, var(--foreground) 2%, transparent); }
+  #sony-world-traffic-simulation .sw-stage { padding: 5px 10px 7px; }
+  #sony-world-traffic-simulation .sw-junction { width: 100%; height: clamp(245px, 40vh, 315px); display: block; }
   #sony-world-traffic-simulation .sw-road { fill: color-mix(in srgb, var(--foreground) 9%, transparent); }
   #sony-world-traffic-simulation .sw-lane { stroke: var(--border); stroke-width: 2; stroke-dasharray: 12 10; }
   #sony-world-traffic-simulation .sw-label,
@@ -1083,15 +1082,41 @@ html&gt;body{padding:0}&lt;/style&gt;
   #sony-world-traffic-simulation .sw-inner { fill: var(--viz-series-1); }
   #sony-world-traffic-simulation .sw-eighty { fill: var(--viz-series-2); }
   #sony-world-traffic-simulation .sw-signal { stroke: var(--background); stroke-width: 3; }
-  #sony-world-traffic-simulation .sw-timeline { display: block; margin-top: 8px; }
-  #sony-world-traffic-simulation .sw-live { min-height: 20px; text-align: center; }
+  #sony-world-traffic-simulation .sw-now { margin: -2px auto 2px; width: fit-content; padding: 3px 10px; border: 1px solid var(--border); border-radius: 999px; font-weight: 650; }
+  #sony-world-traffic-simulation .sw-timeline { display: grid; grid-template-columns: 36px 1fr 36px; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 10px; }
+  #sony-world-traffic-simulation .sw-timeline .form-range { margin: 0; }
+  #sony-world-traffic-simulation .sw-panel { padding: 12px; }
+  #sony-world-traffic-simulation .sw-panel-heading { display: flex; justify-content: space-between; align-items: start; padding-bottom: 9px; border-bottom: 1px solid var(--border); }
+  #sony-world-traffic-simulation .sw-panel-heading &gt; div { display: grid; gap: 2px; }
+  #sony-world-traffic-simulation .sw-panel-heading span { color: var(--muted-foreground); font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+  #sony-world-traffic-simulation .sw-mode { padding: 3px 7px; border: 1px solid var(--border); border-radius: 999px; }
+  #sony-world-traffic-simulation .sw-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 9px 0 11px; }
+  #sony-world-traffic-simulation .sw-stats &gt; div { display: grid; gap: 1px; padding: 8px; border: 1px solid var(--border); }
+  #sony-world-traffic-simulation .sw-stats span { color: var(--muted-foreground); font-size: 10px; }
+  #sony-world-traffic-simulation .sw-stats strong { font-size: 17px; }
+  #sony-world-traffic-simulation .sw-panel h3 { margin: 0 0 4px; font-size: 12px; }
+  #sony-world-traffic-simulation .sw-panel .table { margin: 0; font-size: 11px; }
+  #sony-world-traffic-simulation .sw-panel .table :is(th, td) { padding-block: 4px; }
   #sony-world-traffic-simulation tr.is-selected { background: color-mix(in srgb, var(--accent) 55%, transparent); }
-  #sony-world-traffic-simulation .sw-outcome { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
-  #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 3px; font-size: 16px; }
-  #sony-world-traffic-simulation .sw-outcome .table-responsive { margin-top: 8px; }
-  #sony-world-traffic-simulation .sw-outcome tr.is-jev { font-weight: 650; }
-  @media (max-width: 520px) {
-    #sony-world-traffic-simulation .sw-junction { margin-top: 4px; }
+  #sony-world-traffic-simulation .sw-outcome { display: grid; grid-template-columns: 170px 1fr; gap: 14px; align-items: center; margin-top: 10px; padding: 9px 11px; border: 1px solid var(--border); }
+  #sony-world-traffic-simulation .sw-outcome h3 { margin: 0 0 2px; font-size: 15px; }
+  #sony-world-traffic-simulation .sw-outcome-copy span { color: var(--muted-foreground); font-size: 10px; }
+  #sony-world-traffic-simulation .sw-result-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+  #sony-world-traffic-simulation .sw-result { min-width: 0; padding-left: 8px; border-left: 3px solid var(--border); }
+  #sony-world-traffic-simulation .sw-result.is-jev { border-left-color: var(--viz-series-1); }
+  #sony-world-traffic-simulation .sw-result-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; font-weight: 650; }
+  #sony-world-traffic-simulation .sw-result-value { display: block; font-size: 18px; font-weight: 750; line-height: 1.15; }
+  #sony-world-traffic-simulation .sw-result-meta { display: block; color: var(--muted-foreground); font-size: 9px; white-space: nowrap; }
+  @media (max-width: 800px) {
+    #sony-world-traffic-simulation .sw-header { align-items: start; flex-direction: column; }
+    #sony-world-traffic-simulation .sw-controls { width: 100%; flex-wrap: wrap; }
+    #sony-world-traffic-simulation .sw-controls label { flex: 1 1 120px; }
+    #sony-world-traffic-simulation .sw-controls .form-select { width: 100%; min-width: 0; }
+    #sony-world-traffic-simulation .sw-context, #sony-world-traffic-simulation .sw-main { grid-template-columns: 1fr; }
+    #sony-world-traffic-simulation .sw-context strong + span { white-space: normal; }
+    #sony-world-traffic-simulation .sw-outcome { grid-template-columns: 1fr; }
+    #sony-world-traffic-simulation .sw-result-list { grid-template-columns: 1fr 1fr; }
+    #sony-world-traffic-simulation .sw-junction { height: auto; }
   }
 &lt;/style&gt;
 
@@ -1125,10 +1150,10 @@ html&gt;body{padding:0}&lt;/style&gt;
     rain_and_blockage: &#x27;lower wet-weather capacity, a temporary blockage and an emergency vehicle.&#x27;
   };
   const controllerDescriptions = {
-    fixed_time: &#x27;ordinary code changes direction after 30 green seconds; it does not inspect traffic.&#x27;,
-    max_pressure: &#x27;ordinary code compares queue length and oldest wait, then serves the road under greater pressure.&#x27;,
-    jev_raw: &#x27;Jev receives numeric JSON: queues, waits, recent arrivals and current phase time.&#x27;,
-    jev_prose: &#x27;Jev receives the same state translated into phrases such as “heavy queue” or “long wait”.&#x27;
+    fixed_time: &#x27;Switches every 30 green seconds without inspecting traffic.&#x27;,
+    max_pressure: &#x27;Code compares queue length and oldest wait, then serves the greater pressure.&#x27;,
+    jev_raw: &#x27;Jev reads queues, waits, arrivals and signal phase as numeric JSON.&#x27;,
+    jev_prose: &#x27;Jev reads the same state as phrases such as “heavy queue” and “long wait”.&#x27;
   };
   let timer = null;
   let run = null;
@@ -1160,17 +1185,20 @@ html&gt;body{padding:0}&lt;/style&gt;
     const rank = {jev_raw:0, jev_prose:1, max_pressure:2, fixed_time:3};
     const rows = [...DATA.aggregate.overall].sort((a, b) =&gt; rank[a.controller] - rank[b.controller]);
     overall.replaceChildren(...rows.map(row =&gt; {
-      const tr = document.createElement(&#x27;tr&#x27;);
-      if (row.controller.startsWith(&#x27;jev_&#x27;)) tr.className = &#x27;is-jev&#x27;;
+      const item = document.createElement(&#x27;div&#x27;);
+      item.className = `sw-result${row.controller.startsWith(&#x27;jev_&#x27;) ? &#x27; is-jev&#x27; : &#x27;&#x27;}`;
       const confidence = row.average_confidence == null ? &#x27;—&#x27; : Number(row.average_confidence).toFixed(2);
-      const values = [labels[row.controller], `${Number(row.average_wait_s).toFixed(2)} s`, `${Number(row.p95_wait_s).toFixed(2)} s`, Number(row.average_queue_vehicles).toFixed(2), Number(row.maximum_queue_vehicles).toFixed(2), confidence];
-      values.forEach((value, index) =&gt; {
-        const cell = document.createElement(index === 0 ? &#x27;th&#x27; : &#x27;td&#x27;);
-        cell.textContent = value;
-        if (index &gt; 0) cell.className = &#x27;text-end&#x27;;
-        tr.appendChild(cell);
-      });
-      return tr;
+      const name = document.createElement(&#x27;span&#x27;);
+      name.className = &#x27;sw-result-name&#x27;;
+      name.textContent = labels[row.controller];
+      const value = document.createElement(&#x27;span&#x27;);
+      value.className = &#x27;sw-result-value tabular-nums&#x27;;
+      value.textContent = `${Number(row.average_wait_s).toFixed(2)} s`;
+      const meta = document.createElement(&#x27;span&#x27;);
+      meta.className = &#x27;sw-result-meta&#x27;;
+      meta.textContent = `P95 ${Number(row.p95_wait_s).toFixed(2)} · queue ${Number(row.average_queue_vehicles).toFixed(2)}${confidence === &#x27;—&#x27; ? &#x27;&#x27; : ` · conf ${confidence}`}`;
+      item.append(name, value, meta);
+      return item;
     }));
   }
 
@@ -1201,6 +1229,8 @@ html&gt;body{padding:0}&lt;/style&gt;
     root.querySelector(&#x27;#sw-mean-wait&#x27;).textContent = fmt(run.summary.average_wait_s);
     root.querySelector(&#x27;#sw-p95-wait&#x27;).textContent = fmt(run.summary.p95_wait_s);
     root.querySelector(&#x27;#sw-max-queue&#x27;).textContent = `${run.summary.maximum_queue_vehicles} vehicles`;
+    root.querySelector(&#x27;#sw-run-label&#x27;).textContent = `${scenario.options[scenario.selectedIndex].textContent} · seed ${replicate.value}`;
+    root.querySelector(&#x27;#sw-mode&#x27;).textContent = controller.value.startsWith(&#x27;jev_&#x27;) ? &#x27;JEV&#x27; : &#x27;CODE&#x27;;
     scenarioName.textContent = scenario.options[scenario.selectedIndex].textContent;
     scenarioDescription.textContent = scenarioDescriptions[scenario.value];
     controllerName.textContent = labels[controller.value];
@@ -1213,13 +1243,13 @@ html&gt;body{padding:0}&lt;/style&gt;
   function stop() {
     if (timer) clearInterval(timer);
     timer = null;
-    play.textContent = &#x27;Play&#x27;;
+    play.textContent = &#x27;▶ Play&#x27;;
     play.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;);
   }
 
   play.addEventListener(&#x27;click&#x27;, () =&gt; {
     if (timer) { stop(); return; }
-    play.textContent = &#x27;Pause&#x27;;
+    play.textContent = &#x27;Ⅱ Pause&#x27;;
     play.setAttribute(&#x27;aria-pressed&#x27;, &#x27;true&#x27;);
     timer = setInterval(() =&gt; {
       const next = Number(slider.value) + 1;
